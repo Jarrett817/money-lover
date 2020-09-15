@@ -1,19 +1,22 @@
 <template>
   <div>
     <Layout class-prefix="layout">
-      <number-pad :value.sync="record.amount" @submit="savaRecord"></number-pad>
-      <types :value.sync="record.type"></types>
-      <Notes @update:value="onUpdateNotes"></Notes>
+      <NumberPad :value.sync="record.amount" @submit="savaRecord"></NumberPad>
+      <Types :value.sync="record.type" ></Types>
+      <div class="notesWrapper">
+      <FormItem field-name="备注"
+             placeholder="..."
+             @update:value="onUpdateNotes"></FormItem>
+      </div>
       <Tags :data-source.sync="tags" @update:value="onUpdateTags"></Tags>
     </Layout>
   </div>
 </template>
 
 <script lang="ts">
-
 import NumberPad from "@/components/Money/NumberPad.vue";
 import Types from "@/components/Money/Types.vue";
-import Notes from "@/components/Money/Notes.vue";
+import FormItem from "@/components/Money/FormItem.vue";
 import Tags from "@/components/Money/Tags.vue";
 import Vue from "vue";
 import {Component, Watch} from "vue-property-decorator";
@@ -21,14 +24,14 @@ import {recordListModel} from "@/models/recordListModel.ts";
 import {tagListModel} from "@/models/tagListModel.ts";
 
 const recordList = recordListModel.fetch();
-const tagList = tagListModel.fetch();
+ tagListModel.fetch();
 @Component({
-  components: {Tags, Notes, Types, NumberPad}
+  components: {FormItem, Tags, Notes: FormItem, Types, NumberPad}
 
 })
 export default class Money extends Vue {
 
-  tags = tagList;
+  tags = tagListModel.data;
   record: RecordItem = {tags: [], notes: "", type: "-", amount: 0};
   //将各次收集到的数据对象存入数组
   recordList: RecordItem[] = recordList;
@@ -42,9 +45,9 @@ export default class Money extends Vue {
 
   }
 
-  onUpdateType(value: string) {
-    this.record.type = value;
-  }
+  // onUpdateType(value: string) {
+  //   this.record.type = value;
+  // }
 
 
   savaRecord() {
@@ -60,7 +63,7 @@ export default class Money extends Vue {
 }
 
 </script>
-<style lang="scss">
+<style lang="scss" >
 
 .layout-content {
   display: flex;
@@ -69,5 +72,7 @@ export default class Money extends Vue {
 }
 </style>
 <style lang="scss" scoped>
-
+.notesWrapper{
+  padding:12px 0;
+}
 </style>

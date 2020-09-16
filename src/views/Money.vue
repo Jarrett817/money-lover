@@ -2,11 +2,11 @@
   <div>
     <Layout class-prefix="layout">
       <NumberPad :value.sync="record.amount" @submit="savaRecord"></NumberPad>
-      <Types :value.sync="record.type" ></Types>
+      <Types :value.sync="record.type"></Types>
       <div class="notesWrapper">
-      <FormItem field-name="备注"
-             placeholder="..."
-             @update:value="onUpdateNotes"></FormItem>
+        <FormItem field-name="备注"
+                  placeholder="..."
+                  @update:value="onUpdateNotes"></FormItem>
       </div>
       <Tags :data-source.sync="tags" @update:value="onUpdateTags"></Tags>
     </Layout>
@@ -24,7 +24,7 @@ import {recordListModel} from "@/models/recordListModel.ts";
 import {tagListModel} from "@/models/tagListModel.ts";
 
 const recordList = recordListModel.fetch();
- tagListModel.fetch();
+tagListModel.fetch();
 @Component({
   components: {FormItem, Tags, Notes: FormItem, Types, NumberPad}
 
@@ -45,25 +45,18 @@ export default class Money extends Vue {
 
   }
 
-  // onUpdateType(value: string) {
-  //   this.record.type = value;
-  // }
-
-
   savaRecord() {
-    const record2: RecordItem = recordListModel.clone(this.record);
-    record2.createdAt = new Date();
-    this.recordList.push(record2);
+    recordListModel.create(this.record);
   }
 
   @Watch("recordList")
   onRecordListChanged() {
-    recordListModel.save(this.recordList);
+    recordListModel.save();
   }
 }
 
 </script>
-<style lang="scss" >
+<style lang="scss">
 
 .layout-content {
   display: flex;
@@ -72,7 +65,7 @@ export default class Money extends Vue {
 }
 </style>
 <style lang="scss" scoped>
-.notesWrapper{
-  padding:12px 0;
+.notesWrapper {
+  padding: 12px 0;
 }
 </style>

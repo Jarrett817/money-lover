@@ -1,15 +1,19 @@
 <template>
   <Layout>
     <div class="navBar">
-      <Icon class="leftIcon" name="back"></Icon>
+      <Icon class="leftIcon" name="back" @click.native="goBack"></Icon>
       <span class="title">编辑标签</span>
       <span class="rightIcon"></span>
     </div>
     <div class="form-wrapper">
-    <FormItem field-name="标签名" placeholder="请输入标签名"/>
+      <FormItem :value="tag.name"
+                @update:value="update"
+                field-name="标签名"
+                placeholder="请输入标签名"
+      />
     </div>
     <div class="button-wrapper">
-    <Button>删除标签</Button>
+      <Button @click="remove">删除标签</Button>
     </div>
   </Layout>
 </template>
@@ -25,16 +29,37 @@ import Button from "@/components/Button.vue";
   components: {Button, FormItem}
 })
 export default class EditLabel extends Vue {
+  tag?: { id: string; name: string } = undefined;
+
   created() {
+    //从路由中获取id,并去匹配对应的对象
     const id = this.$route.params.id;
     tagListModel.fetch();
     const tags = tagListModel.data;
+    //获取到id对应的对象
     const tag = tags.filter(t => t.id === id)[0];
     if (tag) {
-      console.log(tag);
+      this.tag = tag;
     } else {
       this.$router.replace("/404");
     }
+  }
+
+  update(tagName: string) {
+    if (this.tag) {
+      tagListModel.update(this.tag.id, tagName);
+    }
+  }
+
+  remove() {
+    if (this.tag) {
+      tagListModel.remove(this.tag.id);
+      this.$router.back();
+    }
+  }
+
+  goBack() {
+    this.$router.back();
   }
 }
 </script>
@@ -51,22 +76,26 @@ export default class EditLabel extends Vue {
 
   > .title {
   }
-  > .leftIcon{
+
+  > .leftIcon {
     width: 24px;
-    height:24px;
+    height: 24px;
   }
-  > .rightIcon{
+
+  > .rightIcon {
     width: 24px;
     height: 24px;
   }
 }
-.form-wrapper{
-  background:white;
+
+.form-wrapper {
+  background: white;
   margin-top: 8px;
 }
-.button-wrapper{
-text-align: center;
-  padding:16px;
+
+.button-wrapper {
+  text-align: center;
+  padding: 16px;
   margin-top: 44-16px;
 }
 </style>

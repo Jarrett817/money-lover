@@ -6,7 +6,7 @@
       <span class="rightIcon"></span>
     </div>
     <div class="form-wrapper">
-      <FormItem :value="tag.name"
+      <FormItem :value="chosenTag.name"
                 @update:value="update"
                 field-name="标签名"
                 placeholder="请输入标签名"
@@ -21,40 +21,37 @@
 <script lang="ts">
 import Vue from "vue";
 import {Component} from "vue-property-decorator";
-import {tagListModel} from "@/models/tagListModel";
 import FormItem from "@/components/Money/FormItem.vue";
 import Button from "@/components/Button.vue";
 
 @Component({
   components: {Button, FormItem}
 })
-export default class EditLabel extends Vue {
-  tag?: { id: string; name: string } = undefined;
+export default class EditTag extends Vue {
+  get chosenTag() {
+    return this.$store.state.chosenTag;
+  }
 
   created() {
     //从路由中获取id,并去匹配对应的对象
     const id = this.$route.params.id;
-    tagListModel.fetch();
-    const tags = tagListModel.data;
-    //获取到id对应的对象
-    const tag = tags.filter(t => t.id === id)[0];
-    if (tag) {
-      this.tag = tag;
-    } else {
+    this.$store.commit("fetchTags");
+    this.$store.commit("setCurrentTag", id);
+    if (!this.chosenTag) {
       this.$router.replace("/404");
     }
   }
 
   update(tagName: string) {
-    if (this.tag) {
-      tagListModel.update(this.tag.id, tagName);
+    if (this.chosenTag) {
+      this.$store.commit("updateTags",
+          {id:this.chosenTag,tagName});
     }
   }
 
   remove() {
-    if (this.tag) {
-      tagListModel.remove(this.tag.id);
-      this.$router.back();
+    if (this.chosenTag) {
+      this.$store.commit('removeTags',this.chosenTag.id)
     }
   }
 

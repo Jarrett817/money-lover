@@ -1,10 +1,10 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button @click="create">新增标签</button>
+      <button @click="createTag">新增标签</button>
     </div>
     <ul class="current">
-      <li v-for="tag in dataSource" :key="tag.id"
+      <li v-for="tag in tagList" :key="tag.id"
           :class="{selected:selectedTags.indexOf(tag)>=0}"
           @click="toggle(tag)">{{ tag.name }}
       </li>
@@ -15,37 +15,40 @@
 <script lang="ts">
 import Vue from "vue";
 import {Component, Prop} from "vue-property-decorator";
+import {mixins} from "vue-class-component";
+import TagHelper from "@/mixins/TagHelper";
 
 @Component
-export default class Tags extends Vue {
-  @Prop(Array) readonly dataSource: string[] | undefined;
+export default class Tags extends mixins(TagHelper) {
   //选中的标签放到数组
   selectedTags: string[] = [];
 
+  get tagList() {
+    return this.$store.state.tagList;
+  }
+
+  created() {
+    this.$store.commit("fetchTags");
+  }
+
   toggle(tag: string) {
-    const index=this.selectedTags.indexOf(tag)
-    if ( index>= 0) {
-      this.selectedTags.splice( index,1);
+    //如果已选中，就去掉
+    const index = this.selectedTags.indexOf(tag);
+    if (index >= 0) {
+      this.selectedTags.splice(index, 1);
     } else {
       this.selectedTags.push(tag);
     }
     //每次点击都将新的数组传给父组件
-    this.$emit('update:value',this.selectedTags)
+    this.$emit("update:value", this.selectedTags);
   }
-  create(){
-    const name=window.prompt('请输入标签名');
-    if(name===''){
-      alert('不能为空！！！')
-    }else if(this.dataSource){
-        this.$emit('update:dataSource',[...this.dataSource,name])
-    }
-  }
+
 }
 </script>
 
 <style lang="scss" scoped>
 .tags {
-  background:white;
+  background: white;
   flex-grow: 1;
   font-size: 14px;
   padding: 16px;

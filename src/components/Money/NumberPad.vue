@@ -5,7 +5,9 @@
       <button @click="keyPress">1</button>
       <button @click="keyPress">2</button>
       <button @click="keyPress">3</button>
-      <button @click="remove">删除</button>
+      <button @click="remove">
+        <Icon name="takeBack"/>
+      </button>
       <button @click="keyPress">4</button>
       <button @click="keyPress">5</button>
       <button @click="keyPress">6</button>
@@ -39,7 +41,6 @@ export default class NumberPad extends Vue {
       return;
     }
     if (this.output === "0") {
-
       if ("0123456789".indexOf(input) >= 0) {
         this.output = input;
       } else {
@@ -47,11 +48,15 @@ export default class NumberPad extends Vue {
       }
       return;
     }
+    //已经有小数点,再输入小数点直接返回
     if (this.output.indexOf(".") >= 0 && input === ".") {
       return;
     }
+    if (this.output === "" && input === ".") {
+      this.output = "0.";
+      return;
+    }
     this.output += input;
-
   }
 
   remove() {
@@ -65,7 +70,7 @@ export default class NumberPad extends Vue {
   ok() {
     this.$emit("update:value", this.output);
     this.$emit("submit", this.output);
-    this.output=''
+    this.output = "";
   }
 }
 </script>
@@ -85,12 +90,14 @@ export default class NumberPad extends Vue {
     @extend %clearFix;
     @extend %innerShadow;
 
+
     > button {
       width: 25%;
       height: 64px;
       float: left;
       background: transparent;
       border: none;
+
 
       &.ok {
         height: 64*2px;
@@ -113,6 +120,13 @@ export default class NumberPad extends Vue {
 
       &:nth-child(3), &:nth-child(6), &:nth-child(9) {
         background: darken($bg, 8%)
+      }
+
+      &:nth-child(4) {
+        .icon {
+          width: 28px;
+          height: 28px;
+        }
       }
 
       &:nth-child(4), &:nth-child(7), &:nth-child(10) {

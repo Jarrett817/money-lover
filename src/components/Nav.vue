@@ -38,15 +38,13 @@ nav {
     flex-direction: column;
 
     .icon {
-      width: 32px;
-      height: 32px;
+      width: 1.8em;
+      height: 1.8em;
     }
-
   }
 
   > .item.selected {
     color: $color-highlight;
   }
-
 }
 </style>

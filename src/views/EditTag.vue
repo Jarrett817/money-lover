@@ -1,10 +1,6 @@
 <template>
   <Layout>
-    <div class="navBar">
-      <Icon class="leftIcon" name="back" @click.native="goBack"></Icon>
-      <span class="title">编辑标签</span>
-      <span class="rightIcon"></span>
-    </div>
+    <TopBar field-name="编辑标签"/>
     <div class="form-wrapper">
       <FormItem :value="chosenTag.name"
                 @update:value="update"
@@ -13,7 +9,7 @@
       />
     </div>
     <div class="button-wrapper">
-      <Button @click="remove">删除标签</Button>
+      <Button  button-type="danger" @click="remove">删除标签</Button>
     </div>
   </Layout>
 </template>
@@ -23,9 +19,10 @@ import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import FormItem from "@/components/Money/FormItem.vue";
 import Button from "@/components/Button.vue";
+import TopBar from "@/components/TopBar.vue";
 
 @Component({
-  components: {Button, FormItem}
+  components: {TopBar, Button, FormItem}
 })
 export default class EditTag extends Vue {
   get chosenTag() {
@@ -55,9 +52,7 @@ export default class EditTag extends Vue {
     }
   }
 
-  goBack() {
-    this.$router.back();
-  }
+
 }
 </script>
 

@@ -1,5 +1,6 @@
 <template>
   <Layout>
+    <TopBar field-name="标签管理"/>
     <div class="tags">
       <router-link class="tag"
                    v-for="tag in tags"
@@ -9,7 +10,7 @@
       </router-link>
     </div>
     <div class="createTag-wrapper">
-      <Button class="createTag"
+      <Button button-type="normal"
               @click="createTag">
         新建标签
       </Button>
@@ -23,10 +24,11 @@ import {Component} from "vue-property-decorator";
 import Button from "@/components/Button.vue";
 import {mixins} from "vue-class-component";
 import TagHelper from "@/mixins/TagHelper";
+import TopBar from "@/components/TopBar.vue";
 
 
 @Component({
-  components: {Button}
+  components: {TopBar, Button}
 })
 export default class Labels extends mixins(TagHelper) {
   get tags() {
@@ -45,6 +47,7 @@ export default class Labels extends mixins(TagHelper) {
   background: white;
   font-size: 16px;
   padding-left: 16px;
+  margin-top: 5px;
 
   > .tag {
     min-height: 44px;

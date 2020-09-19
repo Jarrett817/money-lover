@@ -14,7 +14,7 @@ import Vue from "vue";
 import {Component, Prop} from "vue-property-decorator";
 
 @Component
-export default class Types extends Vue {
+export default class Tabs extends Vue {
   @Prop(String) readonly value!: string;
   @Prop(String)  classPrefix?: string;
 

@@ -11,7 +11,7 @@
       <button @click="keyPress">4</button>
       <button @click="keyPress">5</button>
       <button @click="keyPress">6</button>
-      <button @click="clear">清空</button>
+      <button @click="clear">C</button>
       <button @click="keyPress">7</button>
       <button @click="keyPress">8</button>
       <button @click="keyPress">9</button>
@@ -88,10 +88,10 @@ export default class NumberPad extends Vue {
   }
 
   .buttons {
-    $border: #b7b7b7;
+    $border: #cdc9c9;
     @extend %clearFix;
     @extend %innerShadow;
-    border: 3px solid $border;
+    border: 4px solid $border;
     background: $border;
 
     > button {
@@ -101,9 +101,10 @@ export default class NumberPad extends Vue {
       background: transparent;
       border: $border solid 3px;
       border-radius: 10px;
+      $bg: #ffffff;
 
       &:active {
-        background: #ababab !important;
+        background: darken($bg, 40%) !important;
         color: white;
       }
 
@@ -116,7 +117,6 @@ export default class NumberPad extends Vue {
         width: 50%;
       }
 
-      $bg: #ffffff;
 
       &:nth-child(1) {
         background: $bg;
@@ -127,7 +127,7 @@ export default class NumberPad extends Vue {
       }
 
       &:nth-child(3), &:nth-child(6), &:nth-child(9) {
-        background: darken($bg, 6%)
+        background: darken($bg, 8%)
       }
 
       &:nth-child(4) {
@@ -137,20 +137,33 @@ export default class NumberPad extends Vue {
         }
       }
 
-      &:nth-child(4), &:nth-child(7), &:nth-child(10) {
-        background: darken($bg, 8%)
+      &:nth-child(7), &:nth-child(10) {
+        background: darken($bg, 12%)
       }
 
-      &:nth-child(8), &:nth-child(11), &:nth-child(13) {
-        background: darken($bg, 10%);
+      &:nth-child(11), &:nth-child(13) {
+        background: darken($bg, 16%);
       }
 
       &:nth-child(14) {
-        background: darken($bg, 12%);
+        background: darken($bg, 20%);
+      }
+
+      &:nth-child(4), &:nth-child(8) {
+        background: darken($bg, 40%);
+
+        &:active {
+          background: darken($bg, 6%) !important;
+          color: #333;
+        }
       }
 
       &:nth-child(12) {
-        background: darken($bg, 14%);
+        background: darken($bg, 6%);
+        &:active {
+          background: darken($bg, 40%) !important;
+          color: white;
+        }
       }
     }
   }

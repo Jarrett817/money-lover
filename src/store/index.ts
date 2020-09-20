@@ -12,9 +12,14 @@ const store = new Vuex.Store({
         recordList: [] as RecordItem[],
         tagList: [],
         chosenTag: undefined,
-        sortedList: []
+        sortedList: [],
+        currentType: "-"
     } as RootState,
     mutations: {
+        changeCurrentType(state, type: string) {
+            console.log('这是vuex的type'+type)
+            state.currentType = type;
+        },
         SortList(state, type: string) {
             //筛选出同类型的记录进行排序
             const newList: RecordItem[] = state.recordList.filter(r => r.type === type).sort((a, b) =>
@@ -46,8 +51,8 @@ const store = new Vuex.Store({
                     // console.log("这是元素");
                     // console.log(typeof item.amount);
                     //item.amount取出来是string
-                    return sum+parseFloat(String(item.amount));
-                },0);
+                    return sum + parseFloat(String(item.amount));
+                }, 0);
             });
             state.sortedList = result;
         },

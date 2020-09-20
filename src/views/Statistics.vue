@@ -1,12 +1,8 @@
 <template>
   <layout>
+    <TopBar field-name="明细"></TopBar>
     <Tabs class-prefix="chosen" :data-source="typeList" :value.sync="type"></Tabs>
     <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
-    <div>
-      type:{{ type }}
-      <br/>
-      interval:{{ interval }}
-    </div>
     <div>
       <ol>
         <li class="singleDay" v-for="(group,index) in result" :key="index">
@@ -16,7 +12,11 @@
           </div>
           <ol>
             <li class="eachItem" v-for="item in group.items" :key="item.id">
-              <span>{{ item.tags }}</span>
+              <ol>
+                <li  class="tag-mark" v-for="tag in item.tags" :key="tag.id">
+                  <span>{{ tag.name }}</span>
+                </li>
+              </ol>
               <span>{{ type + item.amount }}</span>
             </li>
           </ol>
@@ -34,9 +34,10 @@ import Tabs from "@/components/Tabs.vue";
 import intervalList from "@/constants/intervalList";
 import typeList from "@/constants/typeList";
 import dayjs from "dayjs";
+import TopBar from "@/components/TopBar.vue";
 
 @Component({
-  components: {Tabs}
+  components: {TopBar, Tabs}
 })
 export default class Statistics extends Vue {
   created() {
@@ -85,7 +86,10 @@ export default class Statistics extends Vue {
     align-items: center;
     margin: 2px;
     padding: 4px;
-
+    .tag-mark{
+      border-left: 2px solid lightgrey;
+      padding-left:3px;
+    }
   }
 }
 

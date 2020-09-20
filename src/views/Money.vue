@@ -2,15 +2,17 @@
   <div>
     <Layout class-prefix="layout">
       <NumberPad :value.sync="record.amount" @submit="savaRecord"></NumberPad>
-      <Tabs :data-source="typeList"
-      :value.sync="record.type"
-      ></Tabs>
+
       <div class="notesWrapper">
         <FormItem field-name="备注"
                   placeholder="..."
                   @update:value="onUpdateNotes"></FormItem>
       </div>
       <Tags :value.sync="record.tags"></Tags>
+      <TopBar field-name="">
+        <Tabs :data-source="typeList"
+        ></Tabs>
+      </TopBar>
     </Layout>
   </div>
 </template>
@@ -23,10 +25,11 @@ import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import typeList from "@/constants/typeList";
 import Tabs from "@/components/Tabs.vue";
+import TopBar from "@/components/TopBar.vue";
 
 
 @Component({
-  components: {Tabs, FormItem, Tags, Notes: FormItem, NumberPad}
+  components: {TopBar, Tabs, FormItem, Tags, Notes: FormItem, NumberPad}
 })
 export default class Money extends Vue {
   created() {
@@ -36,8 +39,11 @@ export default class Money extends Vue {
   get recordList() {
     return this.$store.state.recordList;
   }
-
-  record: RecordItem = {tags: [], notes: "", type: "-", amount: 0};
+  get chosenType(){
+    console.log('这是money获取到的vuex  type'+this.$store.state.currentType)
+    return this.$store.state.currentType;
+  }
+  record: RecordItem = {tags: [], notes: "", type: '', amount: 0};
   //将各次收集到的数据对象存入数组
   typeList = typeList;
 
@@ -46,6 +52,7 @@ export default class Money extends Vue {
   }
 
   savaRecord() {
+    this.record.type=this.chosenType;
     this.$store.commit("createRecord", this.record);
   }
 

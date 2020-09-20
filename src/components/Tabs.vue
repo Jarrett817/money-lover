@@ -4,6 +4,7 @@
         :class="liClass(item)"
         @click="select(item)">{{ item.text }}
     </li>
+
   </ul>
 </template>
 
@@ -17,16 +18,18 @@ type DataSourceItem = { text: string; value: string };
 export default class Tabs extends Vue {
   @Prop({required: true, type: Array})
   dataSource!: DataSourceItem[];
-  @Prop(String) readonly value!: string;
-  @Prop(String) classPrefix?: string;
+
+  @Prop(String)
+  classPrefix?: string;
 
   select(item: DataSourceItem) {
-    this.$emit("update:value", item.value);
+    console.log(item.value)
+    this.$store.commit('changeCurrentType',item.value)
   }
 
   liClass(item: DataSourceItem) {
     return {
-      selected: item.value === this.value,
+      selected: item.value === this.$store.state.currentType,
       [this.classPrefix + "-tabs-item"]: this.classPrefix
     };
   }
@@ -35,9 +38,9 @@ export default class Tabs extends Vue {
 
 <style lang="scss" scoped>
 .tabs {
-  background: #c4c4c4;
+  background: white;
   display: flex;
-  font-size: 24px;
+  font-size: 16px;
 
   > li {
     width: 50%;
@@ -51,8 +54,7 @@ export default class Tabs extends Vue {
       content: '';
       position: absolute;
       bottom: 0;
-      left: 0;
-      width: 100%;
+      width: 2em;
       height: 4px;
       background: #333;
     }

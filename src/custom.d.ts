@@ -16,6 +16,7 @@ type RootState = {
     tagList: Tag[];
     chosenTag?: Tag;
     sortedList: detailedRecord[];
+    currentType: string;
 }
 type DetailedRecord = {
     date: string;

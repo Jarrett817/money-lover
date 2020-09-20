@@ -39,7 +39,7 @@ export default class TopBar extends Vue {
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 2px;
+    padding: 2px 6px;
 
     &.selected::after {
       content: '';

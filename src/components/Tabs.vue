@@ -1,10 +1,10 @@
 <template>
   <ul class="tabs">
-    <li v-for="item in dataSource" :key="item.value"
-        :class="liClass(item)"
-        @click="select(item)">{{ item.text }}
-    </li>
+    <li class="left"  :class="liClass('-')"
+        @click="select('-')" >支出</li>
 
+    <li  class="right" :class="liClass('+')"
+         @click="select('+')">收入</li>
   </ul>
 </template>
 
@@ -16,20 +16,17 @@ type DataSourceItem = { text: string; value: string };
 
 @Component
 export default class Tabs extends Vue {
-  @Prop({required: true, type: Array})
-  dataSource!: DataSourceItem[];
 
   @Prop(String)
   classPrefix?: string;
 
-  select(item: DataSourceItem) {
-    console.log(item.value)
-    this.$store.commit('changeCurrentType',item.value)
+  select(type: string) {
+    this.$store.commit('changeCurrentType',type)
   }
 
-  liClass(item: DataSourceItem) {
+  liClass(type: string) {
     return {
-      selected: item.value === this.$store.state.currentType,
+      selected: type === this.$store.state.currentType,
       [this.classPrefix + "-tabs-item"]: this.classPrefix
     };
   }
@@ -37,6 +34,8 @@ export default class Tabs extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/style/helper.scss';
+
 .tabs {
   background: white;
   display: flex;
@@ -44,19 +43,27 @@ export default class Tabs extends Vue {
 
   > li {
     width: 50%;
-    height: 64px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
 
-    &.selected::after {
+    &.left.selected::after {
       content: '';
       position: absolute;
       bottom: 0;
       width: 2em;
-      height: 4px;
-      background: #333;
+      height: 2px;
+      background: $main-blue;
+    }
+    &.right.selected::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 2em;
+      height: 2px;
+      background: $main-red;
     }
   }
 }

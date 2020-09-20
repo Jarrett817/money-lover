@@ -22,12 +22,13 @@ export default class Button extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/style/helper.scss';
 $h: 32px;
 $border-color: #d9d9d9;
 $color: #333;
-$blue: #40a9ff;
+$blue: $main-blue;
 $radius: 4px;
-$red: red;
+$red: $main-red;
 $grey: grey;
 button {
   height: $h;

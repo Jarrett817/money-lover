@@ -1,14 +1,13 @@
 <template>
   <layout>
     <TopBar field-name="明细"></TopBar>
-    <Tabs class-prefix="chosen" :data-source="typeList" :value.sync="type"></Tabs>
-    <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
+    <Tabs class-prefix="type" ></Tabs>
     <div>
       <ol>
         <li class="singleDay" v-for="(group,index) in result" :key="index">
           <div class="title">
             <span>{{ group.date }}</span>
-            <span>{{ type + group.total }}</span>
+            <span >{{ chosenType + group.total }}</span>
           </div>
           <ol>
             <li class="eachItem" v-for="item in group.items" :key="item.id">
@@ -17,7 +16,7 @@
                   <span>{{ tag.name }}</span>
                 </li>
               </ol>
-              <span>{{ type + item.amount }}</span>
+              <span :class="chosenType==='-'?'expend':'income'">{{ chosenType + item.amount }}</span>
             </li>
           </ol>
         </li>
@@ -32,7 +31,6 @@ import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import Tabs from "@/components/Tabs.vue";
 import intervalList from "@/constants/intervalList";
-import typeList from "@/constants/typeList";
 import dayjs from "dayjs";
 import TopBar from "@/components/TopBar.vue";
 
@@ -40,6 +38,9 @@ import TopBar from "@/components/TopBar.vue";
   components: {TopBar, Tabs}
 })
 export default class Statistics extends Vue {
+  get chosenType(){
+    return this.$store.state.currentType;
+  }
   created() {
     this.$store.commit("fetchRecords");
   }
@@ -53,7 +54,7 @@ export default class Statistics extends Vue {
   }
 
   get result() {
-    this.$store.commit("SortList", this.type);
+    this.$store.commit("SortList", this.chosenType);
     return this.$store.state.sortedList;
   }
 
@@ -61,14 +62,13 @@ export default class Statistics extends Vue {
     return;
   }
 
-  type = "-";
   interval = "day";
   intervalList = intervalList;
-  typeList = typeList;
 }
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/style/helper.scss";
 .singleDay {
   padding: 10px;
 
@@ -90,11 +90,17 @@ export default class Statistics extends Vue {
       border-left: 2px solid lightgrey;
       padding-left:3px;
     }
+    > span.income{
+      color:$main-red;
+    }
+    > span.expend{
+      color:$main-blue;
+    }
   }
 }
 
 //deep语法将此加在Type子组件上
-::v-deep .chosen-tabs-item {
+::v-deep .type-tabs-item {
   background: white;
 
   &.selected {

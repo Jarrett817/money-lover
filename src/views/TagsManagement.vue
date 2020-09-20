@@ -44,10 +44,13 @@ export default class Labels extends mixins(TagHelper) {
 
 <style lang="scss" scoped>
 .tags {
-  background: white;
+  background: inherit;
   font-size: 16px;
   padding-left: 16px;
-  margin-top: 5px;
+  margin-top: 48px;
+  overflow:auto;
+  height:70vh;
+
 
   > .tag {
     min-height: 44px;
@@ -58,19 +61,12 @@ export default class Labels extends mixins(TagHelper) {
 
   }
 }
-
-.createTag {
-  background: #767676;
-  color: white;
-  border-radius: 4px;
-  border: none;
-  height: 40px;
-  padding: 0 16px;
-
-  &-wrapper {
-    text-align: center;
-    padding: 16px;
-    margin-top: 44-16px;
-  }
+.createTag-wrapper{
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}
+::v-deep .TopBar-wrapper{
+  position: fixed;
 }
 </style>

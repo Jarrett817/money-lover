@@ -3,10 +3,11 @@
     <div class="new">
       <button @click="createTag">新增标签</button>
     </div>
+    <div class="tips">滑动查看更多</div>
     <ul class="current">
       <li v-for="tag in tagList" :key="tag.id"
           :class="{selected:selectedTags.indexOf(tag)>=0}"
-          @click="toggle(tag)">{{ tag.name }}
+          @click="toggle(tag)">{{ tag.name.substr(0, 4) }}
       </li>
     </ul>
   </div>
@@ -14,7 +15,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {Component, Prop} from "vue-property-decorator";
+import {Component} from "vue-property-decorator";
 import {mixins} from "vue-class-component";
 import TagHelper from "@/mixins/TagHelper";
 
@@ -47,29 +48,49 @@ export default class Tags extends mixins(TagHelper) {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/style/helper.scss';
+
+.tips {
+  text-align: right;
+  color: grey;
+}
+
 .tags {
-  background: white;
+  background: inherit;
   flex-grow: 1;
   font-size: 14px;
   padding: 16px;
   display: flex;
   flex-direction: column-reverse;
+  justify-content: center;
 
   > .current {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     overflow: auto;
+    font-size: 16px;
+
+    //&::-webkit-scrollbar {
+    //  display: none;
+    //}
 
     > li {
       $bg: #d9d9d9;
-      $h: 24px;
-      background: $bg;
+      $h: 32px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      flex-wrap: wrap;
       height: $h;
       line-height: $h;
-      padding: 0 16px;
+      //padding: 0 16px;
       margin-right: 12px;
-      border-radius: $h/2;
-      margin-top: 4px;
+      margin-bottom: 16px;
+      border-radius: $h/4;
+      border: 1px solid lightgrey;
+      min-width: 80px;
 
       &.selected {
         background: darken($bg, 50%);

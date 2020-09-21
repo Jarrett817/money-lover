@@ -7,6 +7,7 @@
                    :key="tag.id"
                    :to="`/labels/edit/${tag.id}`">
         <span>{{ tag.name }}</span>
+        <Icon name="click"></Icon>
       </router-link>
     </div>
     <div class="createTag-wrapper">
@@ -48,8 +49,8 @@ export default class Labels extends mixins(TagHelper) {
   font-size: 16px;
   padding-left: 16px;
   margin-top: 48px;
-  overflow:auto;
-  height:70vh;
+  overflow: auto;
+  height: 70vh;
 
 
   > .tag {
@@ -59,14 +60,20 @@ export default class Labels extends mixins(TagHelper) {
     align-items: center;
     border-bottom: 1px solid #e6e6e6;
 
+    .icon {
+      margin-right: 10px;
+      color: grey;
+    }
   }
 }
-.createTag-wrapper{
+
+.createTag-wrapper {
   display: flex;
   justify-content: center;
   margin-top: 1em;
 }
-::v-deep .TopBar-wrapper{
+
+::v-deep .TopBar-wrapper {
   position: fixed;
 }
 </style>

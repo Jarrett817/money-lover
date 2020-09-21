@@ -1,23 +1,29 @@
 <template>
   <layout>
     <TopBar field-name="明细"></TopBar>
-    <Tabs class-prefix="type" ></Tabs>
+    <Tabs class-prefix="type"></Tabs>
     <div>
       <ol>
-        <li class="singleDay" v-for="(group,index) in result" :key="index">
+        <li class="singleDay" v-for="(group,groupIndex) in result" :key="groupIndex">
           <div class="title">
             <span>{{ group.date }}</span>
-            <span >{{ chosenType + group.total }}</span>
+            <span>{{ group.total ? chosenType + group.total : 0 }}</span>
           </div>
           <ol>
-            <li class="eachItem" v-for="item in group.items" :key="item.id">
+            <router-link class="eachItem" v-for="(item,ItemIndex) in group.items" :key="ItemIndex"
+                         @click="setCurrentRecord(groupIndex,ItemIndex)"
+                         :to="`/statistics/edit/index2`"
+            >
               <ol>
-                <li  class="tag-mark" v-for="tag in item.tags" :key="tag.id">
+                <li class="tag-mark" v-for="tag in item.tags" :key="tag.id">
                   <span>{{ tag.name }}</span>
                 </li>
+
               </ol>
-              <span :class="chosenType==='-'?'expend':'income'">{{ chosenType + item.amount }}</span>
-            </li>
+              <span :class="chosenType==='-'?'expend':'income'">{{
+                  item.amount ? chosenType + item.amount : chosenType + 0
+                }}</span>
+            </router-link>
           </ol>
         </li>
       </ol>
@@ -38,9 +44,13 @@ import TopBar from "@/components/TopBar.vue";
   components: {TopBar, Tabs}
 })
 export default class Statistics extends Vue {
-  get chosenType(){
+  setCurrentRecord(groupIndex: number,ItemIndex: number){
+    this.$store.commit('setCurrentRecord',{groupIndex,ItemIndex})
+  }
+  get chosenType() {
     return this.$store.state.currentType;
   }
+
   created() {
     this.$store.commit("fetchRecords");
   }
@@ -69,6 +79,7 @@ export default class Statistics extends Vue {
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
+
 .singleDay {
   padding: 10px;
 
@@ -86,15 +97,18 @@ export default class Statistics extends Vue {
     align-items: center;
     margin: 2px;
     padding: 4px;
-    .tag-mark{
+
+    .tag-mark {
       border-left: 2px solid lightgrey;
-      padding-left:3px;
+      padding-left: 3px;
     }
-    > span.income{
-      color:$main-red;
+
+    > span.income {
+      color: $main-red;
     }
-    > span.expend{
-      color:$main-blue;
+
+    > span.expend {
+      color: $main-blue;
     }
   }
 }

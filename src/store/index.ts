@@ -13,11 +13,15 @@ const store = new Vuex.Store({
         tagList: [],
         chosenTag: undefined,
         sortedList: [],
-        currentType: "-"
+        currentType: "-",
+        currentRecord: undefined,
     } as RootState,
     mutations: {
+        setCurrentRecord(state, payload: { groupIndex: number; itemIndex: number }) {
+           const {groupIndex,itemIndex}=payload
+           state.currentRecord= state.sortedList[groupIndex].items[itemIndex];
+        },
         changeCurrentType(state, type: string) {
-            console.log('这是vuex的type'+type)
             state.currentType = type;
         },
         SortList(state, type: string) {
@@ -41,17 +45,21 @@ const store = new Vuex.Store({
                 if (dayjs(last.date).isSame(dayjs(current.createdTime), "day")) {
                     last.items.push(current);
                 } else {
-                    result.push({date: dayjs(current.createdTime).format("YYYY-MM-DD"), items: [current]});
+                    result.push({date: dayjs(current.createdTime).format("YYYY-MM-DD"), total: 0, items: [current]});
                 }
             }
             result.map(group => {
-                group.total = group.items.reduce((sum: number, item) => {
+                group.total = group.items.reduce((sum, item) => {
                     // console.log("这是总和");
                     // console.log(typeof sum);
                     // console.log("这是元素");
                     // console.log(typeof item.amount);
                     //item.amount取出来是string
-                    return sum + parseFloat(String(item.amount));
+                    // console.log("这是total：" + group.total);
+                    // console.log('----------')
+                    // console.log(sum);
+                    // console.log(item.amount);
+                    return sum + item.amount;
                 }, 0);
             });
             state.sortedList = result;
@@ -101,7 +109,7 @@ const store = new Vuex.Store({
             const tagObj = state.tagList.filter(item => item.id === id)[0];
             const index = state.tagList.indexOf(tagObj);
             state.tagList.splice(index, 1);
-            console.log(state.tagList);
+            // console.log(state.tagList);
             store.commit("saveTags");
             router.back();
         }

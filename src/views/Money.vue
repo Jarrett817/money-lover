@@ -28,7 +28,7 @@ import TopBar from "@/components/TopBar.vue";
 
 
 @Component({
-  components: {TopBar, Tabs, FormItem, Tags, Notes: FormItem, NumberPad}
+  components: {TopBar, Tabs, FormItem, Tags, NumberPad}
 })
 export default class Money extends Vue {
   created() {
@@ -51,6 +51,12 @@ export default class Money extends Vue {
 
   savaRecord() {
     this.record.type=this.chosenType;
+
+    if (this.record.tags.length===0) {
+      console.log(this.record.tags)
+      this.record.tags.push({id:'0',name:"这是一条随性的记录..."});
+    }
+    console.log(this.record.tags.length)
     this.$store.commit("createRecord", this.record);
   }
 

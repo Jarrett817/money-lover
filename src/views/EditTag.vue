@@ -3,13 +3,14 @@
     <TopBar field-name="编辑标签"/>
     <div class="form-wrapper">
       <FormItem :value="chosenTag.name"
-                @update:value="update"
+                @update:value="updateTag"
                 field-name="标签名"
                 placeholder="请输入标签名"
       />
     </div>
     <div class="button-wrapper">
-      <Button  button-type="danger" @click="remove">删除标签</Button>
+      <Button button-type="normal" @click="update">保存更改</Button>
+      <Button button-type="danger" @click="remove">删除标签</Button>
     </div>
   </Layout>
 </template>
@@ -39,16 +40,22 @@ export default class EditTag extends Vue {
     }
   }
 
-  update(tagName: string) {
+  newTagName = "";
+
+  updateTag(value: string) {
+    this.newTagName = value;
+  }
+
+  update() {
     if (this.chosenTag) {
-      this.$store.commit("updateTags",
-          {id:this.chosenTag,tagName});
+      this.$store.commit("updateTags", {id: this.chosenTag.id, newName: this.newTagName});
+      this.$router.back();
     }
   }
 
   remove() {
     if (this.chosenTag) {
-      this.$store.commit('removeTags',this.chosenTag.id)
+      this.$store.commit("removeTags", this.chosenTag.id);
     }
   }
 
@@ -86,8 +93,13 @@ export default class EditTag extends Vue {
 }
 
 .button-wrapper {
-  text-align: center;
   padding: 16px;
   margin-top: 44-16px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  >Button{
+    margin:0 10px;
+  }
 }
 </style>

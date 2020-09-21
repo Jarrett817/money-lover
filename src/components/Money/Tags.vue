@@ -22,7 +22,7 @@ import TagHelper from "@/mixins/TagHelper";
 @Component
 export default class Tags extends mixins(TagHelper) {
   //选中的标签放到数组
-  selectedTags: string[] = [];
+  selectedTags: Tag[] = [];
 
   get tagList() {
     return this.$store.state.tagList;
@@ -32,7 +32,7 @@ export default class Tags extends mixins(TagHelper) {
     this.$store.commit("fetchTags");
   }
 
-  toggle(tag: string) {
+  toggle(tag: Tag) {
     //如果已选中，就去掉
     const index = this.selectedTags.indexOf(tag);
     if (index >= 0) {
@@ -93,7 +93,8 @@ export default class Tags extends mixins(TagHelper) {
       min-width: 80px;
 
       &.selected {
-        background: darken($bg, 50%);
+        background: darken($bg, 30%);
+        color: white;
       }
     }
   }

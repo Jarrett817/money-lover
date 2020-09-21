@@ -1,6 +1,6 @@
 //全局定义变量类型
 type RecordItem = {
-    tags: string[];
+    tags: Tag[];
     notes: string;
     type: string;
     amount: number;
@@ -10,16 +10,17 @@ type Tag = {
     id: string;
     name: string;
 }
+type DetailedRecord = {
+    date: string;
+    total?: number ;
+    items: RecordItem[];
+};
 
 type RootState = {
     recordList: RecordItem[];
     tagList: Tag[];
     chosenTag?: Tag;
-    sortedList: detailedRecord[];
+    sortedList: DetailedRecord[];
     currentType: string;
+    currentRecord?: RecordItem;
 }
-type DetailedRecord = {
-    date: string;
-    total?: number;
-    items: RecordItem[];
-};

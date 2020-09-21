@@ -10,8 +10,8 @@
             <span>{{ group.total ? chosenType + group.total : 0 }}</span>
           </div>
           <ol>
-            <router-link class="eachItem" v-for="(item,ItemIndex) in group.items" :key="ItemIndex"
-                         @click="setCurrentRecord(groupIndex,ItemIndex)"
+            <router-link class="eachItem" v-for="(item,itemIndex) in group.items" :key="itemIndex"
+                         @click.native="setCurrentRecord(groupIndex,itemIndex)"
                          :to="`/statistics/edit/index2`"
             >
               <ol>
@@ -44,9 +44,10 @@ import TopBar from "@/components/TopBar.vue";
   components: {TopBar, Tabs}
 })
 export default class Statistics extends Vue {
-  setCurrentRecord(groupIndex: number,ItemIndex: number){
-    this.$store.commit('setCurrentRecord',{groupIndex,ItemIndex})
+  setCurrentRecord(groupIndex: number, itemIndex: number) {
+    this.$store.commit("setCurrentRecord", {groupIndex, itemIndex});
   }
+
   get chosenType() {
     return this.$store.state.currentType;
   }

@@ -18,8 +18,11 @@ const store = new Vuex.Store({
     } as RootState,
     mutations: {
         setCurrentRecord(state, payload: { groupIndex: number; itemIndex: number }) {
-           const {groupIndex,itemIndex}=payload
-           state.currentRecord= state.sortedList[groupIndex].items[itemIndex];
+            //直接获取对应类型的记录
+            const {groupIndex, itemIndex} = payload;
+            state.currentRecord = state.sortedList[groupIndex].items[itemIndex];
+            console.log(groupIndex)
+            console.log(itemIndex)
         },
         changeCurrentType(state, type: string) {
             state.currentType = type;
@@ -28,7 +31,7 @@ const store = new Vuex.Store({
             //筛选出同类型的记录进行排序
             const newList: RecordItem[] = state.recordList.filter(r => r.type === type).sort((a, b) =>
                 dayjs(b.createdTime).valueOf() - dayjs(a.createdTime).valueOf());
-            //如果记录不存在就显示空
+            //如果记录不存在就返回
             if (!newList[0]) {
                 state.sortedList = [];
                 return;

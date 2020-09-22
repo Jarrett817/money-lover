@@ -19,10 +19,12 @@ const store = new Vuex.Store({
     mutations: {
         setCurrentRecord(state, payload: { groupIndex: number; itemIndex: number }) {
             //直接获取对应类型的记录
+            store.commit("fetchRecords");
+            store.commit("SortList", state.currentType);
             const {groupIndex, itemIndex} = payload;
             state.currentRecord = state.sortedList[groupIndex].items[itemIndex];
-            console.log(groupIndex)
-            console.log(itemIndex)
+            console.log(groupIndex);
+            console.log(itemIndex);
         },
         changeCurrentType(state, type: string) {
             state.currentType = type;
@@ -73,6 +75,13 @@ const store = new Vuex.Store({
             state.chosenTag = state.tagList.filter(t => t.id === id)[0];
         }
         ,
+        removeRecord(state, createdTime: string) {
+            state.recordList.splice(state.recordList.indexOf(state.recordList.filter(item => {
+                    item.createdTime === createdTime;
+                }
+            )[0]), 1);
+            store.commit("saveRecords");
+        },
         fetchRecords(state) {
             state.recordList = JSON.parse(window.localStorage.getItem("recordList") || "[]") as RecordItem[];
         }

@@ -1,20 +1,22 @@
 <template>
   <Layout>
-    <TopBar field-name="标签管理"/>
-    <div class="tags">
-      <router-link class="tag"
-                   v-for="tag in tags"
-                   :key="tag.id"
-                   :to="`/labels/edit/${tag.id}`">
-        <span>{{ tag.name }}</span>
-        <Icon name="click"></Icon>
-      </router-link>
-    </div>
-    <div class="createTag-wrapper">
-      <Button button-type="normal"
-              @click="createTag">
-        新建标签
-      </Button>
+    <div class="total-wrapper">
+      <TopBar field-name="标签管理"/>
+      <div class="tags">
+        <router-link class="tag"
+                     v-for="tag in tags"
+                     :key="tag.id"
+                     :to="`/labels/edit/${tag.id}`">
+          <span>{{ tag.name }}</span>
+          <Icon name="click"></Icon>
+        </router-link>
+      </div>
+      <div class="createTag-wrapper">
+        <Button button-type="normal"
+                @click="createTag">
+          新建标签
+        </Button>
+      </div>
     </div>
   </Layout>
 </template>
@@ -44,13 +46,18 @@ export default class Labels extends mixins(TagHelper) {
 </script>
 
 <style lang="scss" scoped>
+.total-wrapper {
+  height:100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .tags {
   background: inherit;
   font-size: 16px;
   padding-left: 16px;
   margin-top: 48px;
   overflow: auto;
-  height: 70vh;
 
 
   > .tag {
@@ -70,7 +77,7 @@ export default class Labels extends mixins(TagHelper) {
 .createTag-wrapper {
   display: flex;
   justify-content: center;
-  margin-top: 1em;
+  margin: 1em 1em;
 }
 
 ::v-deep .TopBar-wrapper {

@@ -6,14 +6,25 @@ import Statistics from "@/views/Statistics.vue";
 import NotFound from "@/views/NotFound.vue";
 import EditLabel from "@/views/EditTag.vue";
 import EditRecord from "@/views/EditRecord.vue";
+import Index from "@/views/Index.vue";
+import Chart from "@/views/Chart.vue";
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
     {
         path: "/",
-        redirect: "/money"
+        redirect: "/index"
     },
+    {
+        path: "/index",
+        component: Index
+    },
+    {
+        path: "/chart",
+        component: Chart
+    },
+
     {
         path: "/money",
         component: Money
@@ -27,12 +38,12 @@ const routes: Array<RouteConfig> = [
         component: Statistics
     },
     {
-        path:'/labels/edit/:id',
-        component:EditLabel
+        path: "/labels/edit/:id",
+        component: EditLabel
     },
     {
-        path:'/statistics/edit/:id',
-        component:EditRecord
+        path: "/statistics/edit/:groupIndex/:itemIndex",
+        component: EditRecord
     },
     {
         path: "*",

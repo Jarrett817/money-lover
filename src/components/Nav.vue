@@ -1,16 +1,25 @@
 <template>
   <nav>
-    <router-link to="/money" class="item" active-class="selected">
-      <Icon name="money"/>
-      记账
+    <router-link to="/index" class="item" active-class="selected">
+      <Icon name="index"/>
+      首页
     </router-link>
+
     <router-link to="/labels" class="item" active-class="selected">
       <Icon name="label"/>
       标签
     </router-link>
+    <router-link to="/money" class="item" active-class="selected">
+      <Icon name="money"/>
+      记账
+    </router-link>
     <router-link to="/statistics" class="item" active-class="selected">
-      <Icon name="statistics"/>
-      统计
+      <Icon name="check"/>
+      明细
+    </router-link>
+    <router-link to="/chart" class="item" active-class="selected">
+      <Icon name="chart"/>
+      图表
     </router-link>
   </nav>
 </template>
@@ -28,7 +37,7 @@ nav {
   @extend %outerShadow;
   display: flex;
   flex-direction: row;
-
+  font-size: 16px;
   > .item {
     padding: 2px 0;
     width: 33.333333%;
@@ -38,8 +47,8 @@ nav {
     flex-direction: column;
 
     .icon {
-      width: 1.8em;
-      height: 1.8em;
+      width: 1.6em;
+      height: 1.6em;
     }
   }
 

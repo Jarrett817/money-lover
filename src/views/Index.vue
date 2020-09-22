@@ -2,11 +2,7 @@
   <Layout>
     <div class="content-wrapper">
       <TopBar field-name="记了个账"></TopBar>
-      <header>
-        <h2>xx月·支出</h2>
-        <h1>0.00</h1>
-        <h2>xx月·收入 <span>0.00</span></h2>
-      </header>
+      <MonthlyOverView></MonthlyOverView>
       <main>
         <span>今日账单</span>
         <div class="tabs-wrapper">
@@ -14,23 +10,7 @@
         </div>
       </main>
       <RecordList class="list-css" :data-source="dataSource"></RecordList>
-      <footer>
-        <label>今日收入
-          <div class="income">
-            <span>￥</span>
-            <Icon name="wave"></Icon>
-          </div>
-
-        </label>
-        <div class="line"></div>
-        <label>今日支出
-          <div class="expend">
-            <span>￥</span>
-            <Icon name="wave"></Icon>
-          </div>
-
-        </label>
-      </footer>
+      <DailyOverView></DailyOverView>
     </div>
   </Layout>
 </template>
@@ -42,9 +22,11 @@ import TopBar from "@/components/TopBar.vue";
 import RecordList from "@/components/RecordList.vue";
 import dayjs from "dayjs";
 import Tabs from "@/components/Tabs.vue";
+import MonthlyOverView from "@/components/IndexPage/MonthlyOverView.vue";
+import DailyOverView from "@/components/IndexPage/DailyOverView.vue";
 
 @Component({
-  components: {Tabs, RecordList, TopBar}
+  components: {DailyOverView, MonthlyOverView, Tabs, RecordList, TopBar}
 })
 export default class Index extends Vue {
   get chosenType() {
@@ -77,18 +59,9 @@ export default class Index extends Vue {
 
   .list-css {
     flex-grow: 2;
-    height:100%;
+    height: 100%;
   }
 
-  > header {
-    > h1 {
-      color: $main-blue;
-    }
-
-    > h2 > span {
-      color: $main-red;
-    }
-  }
 
   > main {
     padding: 10px 0 0 0;
@@ -105,63 +78,10 @@ export default class Index extends Vue {
     }
   }
 
-  > footer {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
 
-    .line {
-      height: 50%;
-      width: 2px;
-      background: lightgrey;
-    }
-    & > label {
-      padding: 10px 0;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-      color: grey;
-
-      & .icon {
-        width: 100%;
-        transform: scale(4);
-      }
-      & .income {
-        text-align: center;
-        color: $main-red;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        > span {
-          padding: 2px;
-
-        }
-      }
-      & .expend {
-        text-align: center;
-        color: $main-blue;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        > span {
-          padding: 2px;
-        }
-      }
-
-
-    }
-
-
-  }
 
 }
+
 ::v-deep .TopBar-wrapper .icon {
   display: none;
 }

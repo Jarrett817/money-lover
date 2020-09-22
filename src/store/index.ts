@@ -15,12 +15,13 @@ const store = new Vuex.Store({
         sortedList: [],
         currentType: "-",
         currentRecord: undefined,
+        dailyList: []
     } as RootState,
     mutations: {
         setCurrentRecord(state, payload: { groupIndex: number; itemIndex: number }) {
             //直接获取对应类型的记录
-            // store.commit("fetchRecords");
-            // store.commit("SortList", state.currentType);
+            store.commit("fetchRecords");
+            store.commit("SortList", state.currentType);
             //重新筛选完
             const {groupIndex, itemIndex} = payload;
             state.currentRecord = state.sortedList[groupIndex].items[itemIndex];
@@ -28,12 +29,6 @@ const store = new Vuex.Store({
         },
         changeCurrentType(state, type: string) {
             state.currentType = type;
-        },
-        getDailyRecords(state, whichDay: string) {
-            store.commit("SortList", state.currentType);
-            state.sortedList = state.sortedList.filter(group => {
-                group.date === whichDay;
-            });
         },
         SortList(state, type: string) {
             //筛选出同类型的记录进行排序
@@ -75,7 +70,7 @@ const store = new Vuex.Store({
         removeRecord(state, createdTime: string) {
             store.commit("fetchRecords");
             const recordObj = state.recordList.filter(item => {
-                   return item.createdTime === createdTime;
+                    return item.createdTime === createdTime;
                 }
             )[0];
             const index = state.recordList.indexOf(recordObj);
@@ -130,7 +125,8 @@ const store = new Vuex.Store({
         updateTags(state, payload: {
             id: string;
             newName: string;
-        }) {
+        })
+        {
             const {id, newName} = payload;
             //获取对应id的对象
             const idList = state.tagList.map(item => item.id);
@@ -139,7 +135,7 @@ const store = new Vuex.Store({
                 const names = state.tagList.map(item => item.name);
                 //如果新输入的名字与原有名字相同，返回重复提示，否则找出该对象，替换名字重新保存
                 if (names.indexOf(newName) >= 0) {
-                    alert("标签名重复");
+                    alert("标签已存在！");
                 } else {
                     const tag = state.tagList.filter(item => item.id === id)[0];
                     tag.name = newName;

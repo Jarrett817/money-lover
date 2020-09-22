@@ -1,8 +1,8 @@
 <template>
   <Layout>
     <div class="content-wrapper">
-      <TopBar field-name="记了个账"></TopBar>
-      <MonthlyOverView></MonthlyOverView>
+      <TopBar  field-name="记了个账"></TopBar>
+      <MonthlyOverView class="over-view"></MonthlyOverView>
       <main>
         <span>今日账单</span>
         <div class="tabs-wrapper">
@@ -36,13 +36,16 @@ export default class Index extends Vue {
   beforeCreate() {
     this.$store.commit("fetchRecords");
   }
-
-  created() {
-    this.$store.commit("getDailyRecords", dayjs(new Date()).format("YYYY-MM-DD"));
+  getDailyRecords(whichDay: string) {
+    const {state}=this.$store
+    this.$store.commit("SortList", state.currentType);
+    state.sortedList = state.sortedList.filter((group: DetailedRecord) => {
+      return group.date === whichDay;
+    });
   }
-
   get dataSource() {
     this.$store.commit("SortList", this.chosenType);
+    this.getDailyRecords( dayjs(new Date()).format("YYYY-MM-DD"));
     //获取当天的日期
     return this.$store.state.sortedList;
   }
@@ -52,6 +55,9 @@ export default class Index extends Vue {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 
+.over-view{
+  border-bottom:2px solid  #e8e8e8;
+}
 .content-wrapper {
   height: 97%;
   display: flex;
@@ -64,12 +70,13 @@ export default class Index extends Vue {
 
 
   > main {
-    padding: 10px 0 0 0;
+    padding: 4px 0;
     display: flex;
     flex-direction: column;
 
     > span:first-child {
-      color: grey
+      color: grey;
+      text-align: center;
     }
 
     .tabs-wrapper {

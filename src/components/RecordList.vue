@@ -4,7 +4,7 @@
       <li class="singleDay" v-for="(group,groupIndex) in dataSource" :key="groupIndex">
         <div class="title">
           <span>{{ group.date }}</span>
-          <span>{{ group.total ? chosenType + group.total : 0 }}</span>
+          <span>{{ group.total ? chosenType + group.total.toFixed(2) : 0.00 }}</span>
         </div>
         <ol>
           <router-link class="eachItem" v-for="(item,itemIndex) in group.items" :key="itemIndex"
@@ -17,7 +17,7 @@
 
             </ol>
             <span :class="chosenType==='-'?'expend':'income'">{{
-                item.amount ? chosenType + item.amount : chosenType + 0
+                item.amount ? chosenType + item.amount.toFixed(2) : chosenType + 0.00
               }}</span>
           </router-link>
         </ol>

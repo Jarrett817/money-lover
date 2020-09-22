@@ -3,7 +3,7 @@
     <TopBar field-name="详情"></TopBar>
     <ul class="options">
       <li><span>类型：</span><span>{{ currentRecord.type === '-' ? '支出' : '收入' }}</span></li>
-      <li><span>金额：</span><span>{{ currentRecord.amount }}</span></li>
+      <li><span>金额：</span><span>{{ currentRecord.amount===null?0:currentRecord.amount.toFixed(2) }}</span></li>
       <li><span> 日期：</span><span>{{ beauty(currentRecord.createdTime) }}</span></li>
       <li class="notes"><span>备注：</span><span class="content">{{ currentRecord.notes }}</span></li>
     </ul>

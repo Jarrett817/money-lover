@@ -38,11 +38,14 @@ export default class Money extends Vue {
   get recordList() {
     return this.$store.state.recordList;
   }
-  get chosenType(){
-    console.log('这是money获取到的vuex  type'+this.$store.state.currentType)
+
+  get chosenType() {
+    console.log("这是money获取到的vuex  type" + this.$store.state.currentType);
     return this.$store.state.currentType;
   }
-  record: RecordItem = {tags: [], notes: "", type: '', amount: 0};
+
+  record: RecordItem = {tags: [], notes: "", type: "", amount: 0, createdTime: ""};
+
   //将各次收集到的数据对象存入数组
 
   onUpdateNotes(value: string) {
@@ -50,13 +53,13 @@ export default class Money extends Vue {
   }
 
   savaRecord() {
-    this.record.type=this.chosenType;
+    this.record.type = this.chosenType;
 
-    if (this.record.tags.length===0) {
-      console.log(this.record.tags)
-      this.record.tags.push({id:'0',name:"这是一条随性的记录..."});
+    if (this.record.tags.length === 0) {
+      console.log(this.record.tags);
+      this.record.tags.push({id: "0", name: "这是一条随性的记录..."});
     }
-    console.log(this.record.tags.length)
+    console.log(this.record.tags.length);
     this.$store.commit("createRecord", this.record);
   }
 
@@ -79,9 +82,10 @@ export default class Money extends Vue {
   justify-content: flex-start;
   align-items: center;
   border-bottom: 1px solid grey;
-  margin:0 16px;
-  .icon{
-    width:1em;
+  margin: 0 16px;
+
+  .icon {
+    width: 1em;
     margin-left: 8px;
   }
 }

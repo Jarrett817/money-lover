@@ -23,4 +23,5 @@ type RootState = {
     sortedList: DetailedRecord[];
     currentType: string;
     currentRecord?: RecordItem;
+    dailyList: RecordItem[];
 }

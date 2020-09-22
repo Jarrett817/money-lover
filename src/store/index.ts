@@ -19,15 +19,21 @@ const store = new Vuex.Store({
     mutations: {
         setCurrentRecord(state, payload: { groupIndex: number; itemIndex: number }) {
             //直接获取对应类型的记录
-            store.commit("fetchRecords");
-            store.commit("SortList", state.currentType);
+            // store.commit("fetchRecords");
+            // store.commit("SortList", state.currentType);
+            //重新筛选完
             const {groupIndex, itemIndex} = payload;
             state.currentRecord = state.sortedList[groupIndex].items[itemIndex];
-            console.log(groupIndex);
-            console.log(itemIndex);
+
         },
         changeCurrentType(state, type: string) {
             state.currentType = type;
+        },
+        getDailyRecords(state, whichDay: string) {
+            store.commit("SortList", state.currentType);
+            state.sortedList = state.sortedList.filter(group => {
+                group.date === whichDay;
+            });
         },
         SortList(state, type: string) {
             //筛选出同类型的记录进行排序
@@ -55,15 +61,6 @@ const store = new Vuex.Store({
             }
             result.map(group => {
                 group.total = group.items.reduce((sum, item) => {
-                    // console.log("这是总和");
-                    // console.log(typeof sum);
-                    // console.log("这是元素");
-                    // console.log(typeof item.amount);
-                    //item.amount取出来是string
-                    // console.log("这是total：" + group.total);
-                    // console.log('----------')
-                    // console.log(sum);
-                    // console.log(item.amount);
                     return sum + item.amount;
                 }, 0);
             });
@@ -76,11 +73,15 @@ const store = new Vuex.Store({
         }
         ,
         removeRecord(state, createdTime: string) {
-            state.recordList.splice(state.recordList.indexOf(state.recordList.filter(item => {
-                    item.createdTime === createdTime;
+            store.commit("fetchRecords");
+            const recordObj = state.recordList.filter(item => {
+                   return item.createdTime === createdTime;
                 }
-            )[0]), 1);
+            )[0];
+            const index = state.recordList.indexOf(recordObj);
+            state.recordList.splice(index, 1);
             store.commit("saveRecords");
+            router.back();
         },
         fetchRecords(state) {
             state.recordList = JSON.parse(window.localStorage.getItem("recordList") || "[]") as RecordItem[];
@@ -121,7 +122,7 @@ const store = new Vuex.Store({
             const tagObj = state.tagList.filter(item => item.id === id)[0];
             const index = state.tagList.indexOf(tagObj);
             state.tagList.splice(index, 1);
-            // console.log(state.tagList);
+
             store.commit("saveTags");
             router.back();
         }

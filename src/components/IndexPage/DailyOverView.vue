@@ -59,15 +59,16 @@ footer {
   }
 
   & > label {
-    width:50%;
+    width: 50%;
+    height: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     color: grey;
     white-space: nowrap;
+
     & .icon {
-      //width: 100%;
       transform: scale(4);
     }
 
@@ -81,7 +82,6 @@ footer {
 
       > span {
         padding: 2px;
-
       }
     }
 

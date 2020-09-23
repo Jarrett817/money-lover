@@ -54,9 +54,7 @@ export default class RecordList extends Vue {
 @import '~@/assets/style/helper.scss';
 
 .list-wrapper {
-  overflow: auto;
-  height: 100%;
-
+  overflow-y: auto;
   .none-tips {
     display: flex;
     justify-content: center;

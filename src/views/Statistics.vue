@@ -1,8 +1,8 @@
 <template>
   <layout>
     <div class="total-wrapper">
-        <TopBar field-name="明细"></TopBar>
-        <Tabs class-prefix="type"></Tabs>
+      <TopBar field-name="明细"></TopBar>
+      <Tabs class-prefix="type"></Tabs>
       <RecordList :data-source="result"></RecordList>
     </div>
   </layout>
@@ -41,10 +41,12 @@ export default class Statistics extends Vue {
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
-.total-wrapper{
-  height:100%;
+
+.total-wrapper {
+  height: 90vh;
   display: flex;
   flex-direction: column;
+
 }
 
 //deep语法将此加在Type子组件上
@@ -59,6 +61,7 @@ export default class Statistics extends Vue {
     }
   }
 }
+
 ::v-deep .TopBar-wrapper .icon {
   visibility: hidden
 }

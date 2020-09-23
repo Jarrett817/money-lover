@@ -63,15 +63,36 @@ export default class Index extends Vue {
 }
 
 .content-wrapper {
-  height: 94%;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   .list-css {
-    flex-grow: 2;
-    height: 100%;
+    flex-grow: 1;
+    //iphone6/7/8，600-700
+    height: 32vh;
+    //iphone5
+    @media (min-height: 500px) and (max-height: 600px) {
+      height: 34vh;
+    }
+    @media (min-height: 700px) and (max-height: 800px) {
+      height: 46vh;
+    }
+    @media (min-height: 800px) and (max-height: 900px) {
+      height: 53vh;
+    }
+    @media (min-height: 900px) and (max-height: 1000px) {
+      height: 58vh;
+    }
+    //针对pad
+    @media (min-height: 1000px) and (max-height: 1200px) {
+      height: 62vh;
+    }
+    @media (min-height: 1200px) and (max-height: 1400px) {
+      height: 72vh;
+    }
   }
-
 
   > main {
     padding: 4px 0;

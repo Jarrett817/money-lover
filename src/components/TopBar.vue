@@ -23,35 +23,6 @@ export default class TopBar extends Vue {
 
 <style lang="scss" scoped>
 @import '~@/assets/style/helper.scss';
-//为在topbar中嵌入tabs
-::v-deep .tabs {
-  background: inherit;
-  display: flex;
-  font-size: 16px;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%);
-
-  > li {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: 2px 6px;
-
-    &.selected::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      width: 2em;
-      height: 2px;
-      background: #333;
-    }
-  }
-}
-
 .TopBar-wrapper {
   display: flex;
   flex-direction: row;
@@ -67,13 +38,14 @@ export default class TopBar extends Vue {
   }
 
   .left {
+    cursor: pointer;
     width: 1.8em;
     height: 1.8em;
   }
 
   .right {
-    width: 32px;
-    height: 32px;
+    width: 1.8em;
+    height: 1.8em;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <label class="notes">
-    <span class="name">{{ this.fieldName }}</span>
+    <span class="name">{{ fieldName }}</span>
     <input type="text"
            :value="value"
            @input="onValueChanged($event.target.value)"
@@ -15,11 +15,13 @@ import {Component, Prop} from "vue-property-decorator";
 @Component
 export default class FormItem extends Vue {
   //获取input输入内容
-  @Prop({default: ""}) value!: string;
+  @Prop({default: ""}) readonly value!: string;
   @Prop({required: true}) fieldName!: string;
   @Prop() placeholder?: string;
-  //监听value，一改变就触发事件
+  //监听value，一改变就把值传给父组件
   onValueChanged(value: string) {
+    console.log('这是传回来的value')
+    console.log(value)
     this.$emit("update:value", value);
   }
 }

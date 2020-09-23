@@ -48,6 +48,7 @@ export default class Tabs extends Vue {
     align-items: center;
     justify-content: center;
     position: relative;
+    cursor: pointer;
 
     &.left.selected::after {
       content: '';

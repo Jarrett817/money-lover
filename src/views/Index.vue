@@ -59,11 +59,11 @@ export default class Index extends Vue {
 
 .over-view {
   border-bottom: 2px solid #e8e8e8;
-  padding-left: 1em;
+  padding: 6px 1em;
 }
 
 .content-wrapper {
-  height: 95%;
+  height: 94%;
   display: flex;
   flex-direction: column;
 
@@ -93,7 +93,7 @@ export default class Index extends Vue {
 }
 
 ::v-deep .TopBar-wrapper .icon {
-  display: none;
+  visibility: hidden
 }
 
 //deep语法将此加在Type子组件上

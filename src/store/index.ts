@@ -141,12 +141,16 @@ const store = new Vuex.Store({
             if (idList.indexOf(id) >= 0) {
                 const names = state.tagList.map(item => item.name);
                 //如果新输入的名字与原有名字相同，返回重复提示，否则找出该对象，替换名字重新保存
-                if (names.indexOf(newName) >= 0) {
+                if (names.indexOf(newName) >= 0 || newName === "") {
                     alert("标签已存在！");
+                    router.back();
+                    return;
                 } else {
                     const tag = state.tagList.filter(item => item.id === id)[0];
                     tag.name = newName;
                     store.commit("saveTags");
+                    alert("修改成功！");
+                    router.back();
                 }
             } else {
                 return "not found";

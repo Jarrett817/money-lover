@@ -95,6 +95,13 @@ export default class NumberPad extends Vue {
     background: $border;
 
     > button {
+      @media (min-width: 500px) {
+        & {
+          height: 30px;
+        }
+      }
+      $h: 30px;
+      cursor: pointer;
       width: 25%;
       height: 64px;
       float: left;
@@ -109,6 +116,11 @@ export default class NumberPad extends Vue {
       }
 
       &.ok {
+        @media (min-width: 500px) {
+          & {
+            height: 30*2px;
+          }
+        }
         height: 64*2px;
         float: right;
       }
@@ -131,7 +143,15 @@ export default class NumberPad extends Vue {
       }
 
       &:nth-child(4) {
+
+
         .icon {
+          @media (min-width: 500px) {
+            &  {
+              height: 1em;
+              width: 1em;
+            }
+          }
           width: 28px;
           height: 28px;
         }
@@ -160,6 +180,7 @@ export default class NumberPad extends Vue {
 
       &:nth-child(12) {
         background: darken($bg, 6%);
+
         &:active {
           background: darken($bg, 40%) !important;
           color: white;

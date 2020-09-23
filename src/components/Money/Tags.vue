@@ -75,6 +75,7 @@ export default class Tags extends mixins(TagHelper) {
     //}
 
     > li {
+      cursor: pointer;
       $bg: #d9d9d9;
       $h: 32px;
       display: flex;
@@ -103,6 +104,7 @@ export default class Tags extends mixins(TagHelper) {
     padding-top: 16px;
 
     button {
+      cursor: pointer;
       background: transparent;
       border: none;
       color: #999;

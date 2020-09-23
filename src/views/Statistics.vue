@@ -59,4 +59,7 @@ export default class Statistics extends Vue {
     }
   }
 }
+::v-deep .TopBar-wrapper .icon {
+  visibility: hidden
+}
 </style>

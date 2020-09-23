@@ -47,7 +47,7 @@ export default class Labels extends mixins(TagHelper) {
 
 <style lang="scss" scoped>
 .total-wrapper {
-  height:100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -56,7 +56,6 @@ export default class Labels extends mixins(TagHelper) {
   background: inherit;
   font-size: 16px;
   padding-left: 16px;
-  margin-top: 48px;
   overflow: auto;
 
 
@@ -79,8 +78,7 @@ export default class Labels extends mixins(TagHelper) {
   justify-content: center;
   margin: 1em 1em;
 }
-
-::v-deep .TopBar-wrapper {
-  position: fixed;
+::v-deep .TopBar-wrapper .icon {
+  visibility: hidden
 }
 </style>

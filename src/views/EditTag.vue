@@ -43,13 +43,14 @@ export default class EditTag extends Vue {
   newTagName = "";
 
   updateTag(value: string) {
+    console.log("这是获取到的value");
+    console.log(value);
     this.newTagName = value;
   }
 
   update() {
     if (this.chosenTag) {
       this.$store.commit("updateTags", {id: this.chosenTag.id, newName: this.newTagName});
-      this.$router.back();
     }
   }
 
@@ -95,11 +96,12 @@ export default class EditTag extends Vue {
 .button-wrapper {
   padding: 16px;
   margin-top: 44-16px;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-  >Button{
-    margin:0 10px;
+
+  > Button {
+    margin: 0 10px;
   }
 }
 </style>

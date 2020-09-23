@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <Layout class-prefix="layout">
-      <NumberPad :value.sync="record.amount" @submit="savaRecord"></NumberPad>
-
+  <Layout class-prefix="layout">
+    <div class="total-wrapper">
+      <TopBar field-name="">
+        <Tabs></Tabs>
+      </TopBar>
+      <Tags :value.sync="record.tags"></Tags>
       <div class="notesWrapper">
         <Icon name="edit"></Icon>
         <FormItem field-name=""
@@ -10,12 +12,11 @@
                   :value.sync="record.notes"
         ></FormItem>
       </div>
-      <Tags :value.sync="record.tags"></Tags>
-      <TopBar field-name="">
-        <Tabs></Tabs>
-      </TopBar>
-    </Layout>
-  </div>
+
+      <NumberPad :value.sync="record.amount" @submit="savaRecord"></NumberPad>
+
+    </div>
+  </Layout>
 </template>
 
 <script lang="ts">
@@ -62,15 +63,13 @@ export default class Money extends Vue {
 }
 
 </script>
-<style lang="scss">
-
-.layout-content {
-  display: flex;
-  flex-direction: column-reverse;
-
-}
-</style>
 <style lang="scss" scoped>
+.total-wrapper {
+  display: flex;
+  flex-direction: column;
+  height:100%;
+}
+
 .notesWrapper {
   padding: 2px 0;
   display: flex;
@@ -81,8 +80,28 @@ export default class Money extends Vue {
   margin: 0 16px;
 
   .icon {
-    width: 1em;
     margin-left: 8px;
+  }
+}
+::v-deep .TopBar-wrapper .icon {
+  visibility: hidden
+}
+::v-deep .tabs {
+  background: inherit;
+  display: flex;
+  font-size: 16px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+
+  > li {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 0;
   }
 }
 </style>

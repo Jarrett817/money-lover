@@ -5,7 +5,6 @@
         <span>￥{{ getSum('+') ? getSum('+') : 0 }}</span>
         <Icon name="wave"></Icon>
       </div>
-
     </label>
     <div class="line"></div>
     <label>今日支出
@@ -13,7 +12,6 @@
         <span>￥{{ getSum('-') ? getSum('-') : 0 }}</span>
         <Icon name="wave"></Icon>
       </div>
-
     </label>
   </footer>
 </template>
@@ -55,21 +53,21 @@ footer {
   justify-content: center;
 
   .line {
-    height: 50%;
+    height: 70%;
     width: 2px;
     background: lightgrey;
   }
 
   & > label {
-    padding: 10px 0;
+    width:50%;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     color: grey;
-
+    white-space: nowrap;
     & .icon {
-      width: 100%;
+      //width: 100%;
       transform: scale(4);
     }
 

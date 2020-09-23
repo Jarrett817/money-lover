@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <div class="content-wrapper">
-      <TopBar  field-name="记了个账"></TopBar>
+      <TopBar field-name="记了个账"></TopBar>
       <MonthlyOverView class="over-view"></MonthlyOverView>
       <main>
         <span>今日账单</span>
@@ -36,16 +36,18 @@ export default class Index extends Vue {
   beforeCreate() {
     this.$store.commit("fetchRecords");
   }
+
   getDailyRecords(whichDay: string) {
-    const {state}=this.$store
+    const {state} = this.$store;
     this.$store.commit("SortList", state.currentType);
     state.sortedList = state.sortedList.filter((group: DetailedRecord) => {
       return group.date === whichDay;
     });
   }
+
   get dataSource() {
     this.$store.commit("SortList", this.chosenType);
-    this.getDailyRecords( dayjs(new Date()).format("YYYY-MM-DD"));
+    this.getDailyRecords(dayjs(new Date()).format("YYYY-MM-DD"));
     //获取当天的日期
     return this.$store.state.sortedList;
   }
@@ -55,11 +57,13 @@ export default class Index extends Vue {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 
-.over-view{
-  border-bottom:2px solid  #e8e8e8;
+.over-view {
+  border-bottom: 2px solid #e8e8e8;
+  padding-left: 1em;
 }
+
 .content-wrapper {
-  height: 97%;
+  height: 95%;
   display: flex;
   flex-direction: column;
 
@@ -84,7 +88,6 @@ export default class Index extends Vue {
       border-top: 1px solid #e8e8e8;
     }
   }
-
 
 
 }

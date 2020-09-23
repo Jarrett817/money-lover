@@ -96,6 +96,14 @@ const store = new Vuex.Store({
         ,
         fetchTags(state) {
             state.tagList = JSON.parse(window.localStorage.getItem("tagList") || "[]");
+            if (!state.tagList || state.tagList.length === 0) {
+                state.tagList = [
+                    {id: createId().toString(), name: "抽烟"},
+                    {id: createId().toString(), name: "喝酒"},
+                    {id: createId().toString(), name: "烫头"}
+                ];
+                store.commit("saveTags");
+            }
         }
         ,
         createTag(state, name: string) {
@@ -125,8 +133,7 @@ const store = new Vuex.Store({
         updateTags(state, payload: {
             id: string;
             newName: string;
-        })
-        {
+        }) {
             const {id, newName} = payload;
             //获取对应id的对象
             const idList = state.tagList.map(item => item.id);

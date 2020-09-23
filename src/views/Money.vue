@@ -7,7 +7,8 @@
         <Icon name="edit"></Icon>
         <FormItem field-name=""
                   placeholder="写备注..."
-                  @update:value="onUpdateNotes"></FormItem>
+                  :value.sync="record.notes"
+        ></FormItem>
       </div>
       <Tags :value.sync="record.tags"></Tags>
       <TopBar field-name="">
@@ -47,11 +48,6 @@ export default class Money extends Vue {
   record: RecordItem = {tags: [], notes: "", type: "", amount: 0, createdTime: ""};
 
   //将各次收集到的数据对象存入数组
-
-  onUpdateNotes(value: string) {
-    this.record.notes = value;
-  }
-
   savaRecord() {
     this.record.type = this.chosenType;
 
@@ -59,8 +55,8 @@ export default class Money extends Vue {
       console.log(this.record.tags);
       this.record.tags.push({id: "0", name: "这是一条随性的记录..."});
     }
-    console.log(this.record.tags.length);
     this.$store.commit("createRecord", this.record);
+    this.record.notes = "";
   }
 
 }

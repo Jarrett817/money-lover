@@ -1,5 +1,11 @@
 <template>
   <div class="list-wrapper">
+    <div class="none-tips" v-if="dataSource.length===0">
+      <span>今天还没有记账，快去记一笔吧！</span>
+      <router-link class="link-css" to="/money">
+        <Icon name="add"></Icon>
+      </router-link>
+    </div>
     <ol>
       <li class="singleDay" v-for="(group,groupIndex) in dataSource" :key="groupIndex">
         <div class="title">
@@ -49,6 +55,29 @@ export default class RecordList extends Vue {
 
 .list-wrapper {
   overflow: auto;
+  height: 100%;
+
+  .none-tips {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    color: grey;
+
+    .link-css {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .icon {
+      height: 60%;
+      width: 60%;
+      color: lightgrey;
+    }
+  }
 }
 
 .singleDay {

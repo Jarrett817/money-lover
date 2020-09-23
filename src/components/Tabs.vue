@@ -1,10 +1,12 @@
 <template>
   <ul class="tabs">
-    <li class="left"  :class="liClass('-')"
-        @click="select('-')" >支出</li>
+    <li class="left" :class="liClass('-')"
+        @click="select('-')">支出
+    </li>
 
-    <li  class="right" :class="liClass('+')"
-         @click="select('+')">收入</li>
+    <li class="right" :class="liClass('+')"
+        @click="select('+')">收入
+    </li>
   </ul>
 </template>
 
@@ -21,7 +23,7 @@ export default class Tabs extends Vue {
   classPrefix?: string;
 
   select(type: string) {
-    this.$store.commit('changeCurrentType',type)
+    this.$store.commit("changeCurrentType", type);
   }
 
   liClass(type: string) {
@@ -56,14 +58,19 @@ export default class Tabs extends Vue {
       bottom: 0;
       width: 2em;
       height: 2px;
+      left: 50%;
+      transform: translate(-50%);
       background: $main-blue;
     }
+
     &.right.selected::after {
       content: '';
       position: absolute;
       bottom: 0;
       width: 2em;
       height: 2px;
+      left: 50%;
+      transform: translate(-50%);
       background: $main-red;
     }
   }

@@ -20,10 +20,8 @@ body {
 
 @media(min-width: 500px) {
   #app {
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
   }
 }
-
-
 </style>

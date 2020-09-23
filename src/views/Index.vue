@@ -71,26 +71,26 @@ export default class Index extends Vue {
   .list-css {
     flex-grow: 1;
     //iphone6/7/8，600-700
-    height: 32vh;
+    height: 29vh;
     //iphone5
     @media (min-height: 500px) and (max-height: 600px) {
-      height: 34vh;
+      height: 20vh;
     }
     @media (min-height: 700px) and (max-height: 800px) {
-      height: 46vh;
+      height: 38vh;
     }
     @media (min-height: 800px) and (max-height: 900px) {
-      height: 53vh;
+      height: 44vh;
     }
     @media (min-height: 900px) and (max-height: 1000px) {
       height: 58vh;
     }
     //针对pad
     @media (min-height: 1000px) and (max-height: 1200px) {
-      height: 62vh;
+      height: 55vh;
     }
     @media (min-height: 1200px) and (max-height: 1400px) {
-      height: 72vh;
+      height: 66vh;
     }
   }
 

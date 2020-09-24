@@ -1,20 +1,27 @@
 <template>
-  <Layout class-prefix="layout">
-    <div class="total-wrapper">
-      <TopBar field-name="">
-        <Tabs></Tabs>
-      </TopBar>
+  <Layout>
+    <TopBar field-name="">
+      <Tabs></Tabs>
+    </TopBar>
+    <div class="tagsWrapper">
       <Tags :value.sync="record.tags"></Tags>
-      <div class="notesWrapper">
-        <Icon name="edit"></Icon>
-        <FormItem field-name=""
-                  placeholder="写备注..."
-                  :value.sync="record.notes"
-        ></FormItem>
-      </div>
-
+    </div>
+    <div class="createdTimeWrapper">
+      <Icon name="date"></Icon>
+      <FormItem field-name=""
+                type="date"
+                :value.sync="record.createdTime"
+      ></FormItem>
+    </div>
+    <div class="notesWrapper">
+      <Icon name="edit"></Icon>
+      <FormItem field-name=""
+                placeholder="写备注..."
+                :value.sync="record.notes"
+      ></FormItem>
+    </div>
+    <div class="numberPadWrapper">
       <NumberPad :value.sync="record.amount" @submit="savaRecord"></NumberPad>
-
     </div>
   </Layout>
 </template>
@@ -46,7 +53,7 @@ export default class Money extends Vue {
     return this.$store.state.currentType;
   }
 
-  record: RecordItem = {tags: [], notes: "", type: "", amount: 0, createdTime: ""};
+  record: RecordItem = {tags: [], notes: "", type: "", amount: 0, createdTime: new Date().toISOString()};
 
   //将各次收集到的数据对象存入数组
   savaRecord() {
@@ -64,28 +71,52 @@ export default class Money extends Vue {
 
 </script>
 <style lang="scss" scoped>
-.total-wrapper {
-  display: flex;
-  flex-direction: column;
-  height:100%;
+.tagsWrapper {
+flex-grow: 1;
 }
 
-.notesWrapper {
+.createdTimeWrapper {
+  flex-grow: 1;
   padding: 2px 0;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  border-bottom: 1px solid grey;
   margin: 0 16px;
 
   .icon {
     margin-left: 8px;
   }
 }
+
+.numberPadWrapper {
+  flex-grow:1;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row;
+  justify-content:center ;
+width:100%;
+}
+
+.notesWrapper {
+  flex-grow: 1;
+
+  padding: 2px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 16px;
+
+  .icon {
+    margin-left: 8px;
+  }
+}
+
 ::v-deep .TopBar-wrapper .icon {
   visibility: hidden
 }
+
 ::v-deep .tabs {
   background: inherit;
   display: flex;
@@ -93,7 +124,6 @@ export default class Money extends Vue {
   width: 100%;
   justify-content: center;
   align-items: center;
-
 
   > li {
     width: 25%;

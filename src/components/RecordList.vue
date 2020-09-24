@@ -1,34 +1,38 @@
 <template>
-  <div class="list-wrapper">
-    <div class="none-tips" v-if="dataSource.length===0">
-      <span>今天还没有记账，快去记一笔吧！</span>
-      <router-link class="link-css" to="/money">
-        <Icon name="add"></Icon>
-      </router-link>
-    </div>
-    <ol>
-      <li class="singleDay" v-for="(group,groupIndex) in dataSource" :key="groupIndex">
-        <div class="title">
-          <span>{{ group.date }}</span>
-          <span>{{ group.total ? chosenType + group.total.toFixed(2) : 0.00 }}</span>
-        </div>
-        <ol>
-          <router-link class="eachItem" v-for="(item,itemIndex) in group.items" :key="itemIndex"
-                       :to="`/statistics/edit/${groupIndex}/${itemIndex}`"
-          >
-            <ol>
-              <li :class="tagMark()" v-for="tag in item.tags" :key="tag.id">
-                <span>{{ tag.name }}</span>
-              </li>
+  <div class="totalWrapper">
+    <template v-if="dataSource.length===0">
+      <div class="none-tips">
+        <div>今天还没有记账，快去记一笔吧！</div>
+        <router-link class="link-css" to="/money">
+          <Icon name="add"></Icon>
+        </router-link>
+      </div>
+    </template>
+    <template v-else>
+      <ol>
+        <li class="singleDay" v-for="(group,groupIndex) in dataSource" :key="groupIndex">
+          <div class="title">
+            <span>{{ group.date }}</span>
+            <span>{{ group.total ? chosenType + group.total.toFixed(2) : 0.00 }}</span>
+          </div>
+          <ol>
+            <router-link class="eachItem" v-for="(item,itemIndex) in group.items" :key="itemIndex"
+                         :to="`/statistics/edit/${groupIndex}/${itemIndex}`"
+            >
+              <ol>
+                <li :class="tagMark()" v-for="tag in item.tags" :key="tag.id">
+                  <span>{{ tag.name }}</span>
+                </li>
 
-            </ol>
-            <span :class="chosenType==='-'?'expend':'income'">{{
-                item.amount ? chosenType + item.amount.toFixed(2) : chosenType + 0.00
-              }}</span>
-          </router-link>
-        </ol>
-      </li>
-    </ol>
+              </ol>
+              <span :class="chosenType==='-'?'expend':'income'">{{
+                  item.amount ? chosenType + item.amount.toFixed(2) : chosenType + 0.00
+                }}</span>
+            </router-link>
+          </ol>
+        </li>
+      </ol>
+    </template>
   </div>
 </template>
 
@@ -52,29 +56,31 @@ export default class RecordList extends Vue {
 
 <style lang="scss" scoped>
 @import '~@/assets/style/helper.scss';
+.totalWrapper{
+  height:100%;
+  display:flex;
+  flex-direction: column;
+}
 
-.list-wrapper {
-  overflow-y: auto;
-  .none-tips {
+.none-tips {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: grey;
+
+  .link-css {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    height: 100%;
-    color: grey;
 
-    .link-css {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  }
 
-    }
-
-    .icon {
-      height: 60%;
-      width: 60%;
-      color: lightgrey;
-    }
+  .icon {
+    height: 60%;
+    width: 60%;
+    color: lightgrey;
   }
 }
 

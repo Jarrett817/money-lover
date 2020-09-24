@@ -1,15 +1,21 @@
 <template>
   <Layout>
-    <div class="content-wrapper">
+    <div class="topBar-wrapper">
       <TopBar field-name="记了个账"></TopBar>
+    </div>
+    <div class="monthly-over-view">
       <MonthlyOverView class="over-view"></MonthlyOverView>
-      <main>
-        <span>今日账单</span>
-        <div class="tabs-wrapper">
-          <Tabs class-prefix="type"></Tabs>
-        </div>
-      </main>
-      <RecordList class="list-css" :data-source="dataSource"></RecordList>
+    </div>
+    <main>
+      <span>今日账单</span>
+      <div class="tabs-wrapper">
+        <Tabs class-prefix="type"></Tabs>
+      </div>
+    </main>
+    <div class="list-css-wrapper">
+      <RecordList :data-source="dataSource"></RecordList>
+    </div>
+    <div class="daily-view-wrapper">
       <DailyOverView></DailyOverView>
     </div>
   </Layout>
@@ -57,61 +63,39 @@ export default class Index extends Vue {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 
-.over-view {
-  border-bottom: 2px solid #e8e8e8;
+.monthly-over-view {
   padding: 6px 1em;
 }
 
-.content-wrapper {
-  height: 100%;
+.list-css-wrapper {
+  flex:1;
+  flex-grow: 6;
+  min-height: 0;
+  overflow: auto;
+}
+
+.daily-view-wrapper {
+  flex-shrink: 0;
+  flex-grow: 1;
+}
+
+main {
+  padding: 4px 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 
-  .list-css {
-    flex-grow: 1;
-    //iphone6/7/8，600-700
-    height: 29vh;
-    //iphone5
-    @media (min-height: 500px) and (max-height: 600px) {
-      height: 20vh;
-    }
-    @media (min-height: 700px) and (max-height: 800px) {
-      height: 38vh;
-    }
-    @media (min-height: 800px) and (max-height: 900px) {
-      height: 44vh;
-    }
-    @media (min-height: 900px) and (max-height: 1000px) {
-      height: 58vh;
-    }
-    //针对pad
-    @media (min-height: 1000px) and (max-height: 1200px) {
-      height: 55vh;
-    }
-    @media (min-height: 1200px) and (max-height: 1400px) {
-      height: 66vh;
-    }
+  > span:first-child {
+    color: grey;
+    text-align: center;
+    border-top: 2px solid #e8e8e8;
   }
 
-  > main {
-    padding: 4px 0;
-    display: flex;
-    flex-direction: column;
-
-    > span:first-child {
-      color: grey;
-      text-align: center;
-    }
-
-    .tabs-wrapper {
-      border-bottom: 1px solid #e8e8e8;
-      border-top: 1px solid #e8e8e8;
-    }
+  .tabs-wrapper {
+    border-bottom: 1px solid #e8e8e8;
+    border-top: 1px solid #e8e8e8;
   }
-
-
 }
+
 
 ::v-deep .TopBar-wrapper .icon {
   visibility: hidden

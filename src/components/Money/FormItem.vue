@@ -1,16 +1,25 @@
 <template>
   <label class="notes">
     <span class="name">{{ fieldName }}</span>
-    <input type="text"
+    <template v-if="type==='date'">
+      <input :type="type||'text'"
+             :value="beauty(value)"
+             @input="onValueChanged($event.target.value)"
+             :placeholder="placeholder">
+    </template>
+    <template v-else>
+    <input :type="type||'text'"
            :value="value"
            @input="onValueChanged($event.target.value)"
            :placeholder="placeholder">
+    </template>
   </label>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import {Component, Prop} from "vue-property-decorator";
+import dayjs from "dayjs";
 
 @Component
 export default class FormItem extends Vue {
@@ -18,12 +27,19 @@ export default class FormItem extends Vue {
   @Prop({default: ""}) readonly value!: string;
   @Prop({required: true}) fieldName!: string;
   @Prop() placeholder?: string;
+  @Prop() type?: string;
+
   //监听value，一改变就把值传给父组件
   onValueChanged(value: string) {
-    console.log('这是传回来的value')
-    console.log(value)
+    console.log("这是传回来的value");
+    console.log(value);
     this.$emit("update:value", value);
   }
+
+  beauty(date: string){
+    return dayjs(date).format('YYYY-MM-DD')
+  }
+
 }
 
 </script>

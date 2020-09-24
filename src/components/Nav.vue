@@ -9,9 +9,9 @@
       <Icon name="label"/>
       标签
     </router-link>
-    <router-link to="/money" class="item" active-class="selected">
+    <router-link to="/money" class="item main" active-class="mainSelected">
       <Icon name="money"/>
-      记账
+      <span>记账</span>
     </router-link>
     <router-link to="/statistics" class="item" active-class="selected">
       <Icon name="check"/>
@@ -39,6 +39,7 @@ nav {
   flex-direction: row;
   font-size: 16px;
   flex-shrink: 0;
+
   > .item {
     padding: 2px 0;
     width: 33.333333%;
@@ -47,14 +48,26 @@ nav {
     align-items: center;
     flex-direction: column;
 
+    &.selected {
+      color: $main-blue;
+    }
+
     .icon {
       width: 1.6em;
       height: 1.6em;
     }
-  }
 
-  > .item.selected {
-    color: $main-blue;
+    &.main {
+      &.mainSelected {
+        color: orange;
+      }
+
+      .icon {
+        width: 1.6em;
+        height: 1.6em;
+        transform: scale(1.2);
+      }
+    }
   }
 }
 </style>

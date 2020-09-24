@@ -1,8 +1,8 @@
 <template>
   <layout>
-    <div class="total-wrapper">
-      <TopBar field-name="明细"></TopBar>
-      <Tabs class-prefix="type"></Tabs>
+    <TopBar field-name="明细"></TopBar>
+    <Tabs class-prefix="type"></Tabs>
+    <div class="list-wrapper">
       <RecordList :data-source="result"></RecordList>
     </div>
   </layout>
@@ -42,11 +42,9 @@ export default class Statistics extends Vue {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 
-.total-wrapper {
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
-
+.list-wrapper {
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 //deep语法将此加在Type子组件上

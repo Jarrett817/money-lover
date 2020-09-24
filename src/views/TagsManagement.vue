@@ -1,6 +1,5 @@
 <template>
   <Layout>
-    <div class="total-wrapper">
       <TopBar field-name="标签管理"/>
       <div class="tags">
         <router-link class="tag"
@@ -17,7 +16,6 @@
           新建标签
         </Button>
       </div>
-    </div>
   </Layout>
 </template>
 
@@ -46,18 +44,12 @@ export default class Labels extends mixins(TagHelper) {
 </script>
 
 <style lang="scss" scoped>
-.total-wrapper {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 .tags {
+  flex-grow:1;
   background: inherit;
   font-size: 16px;
   padding-left: 16px;
   overflow: auto;
-
 
   > .tag {
     min-height: 44px;
@@ -72,8 +64,8 @@ export default class Labels extends mixins(TagHelper) {
     }
   }
 }
-
 .createTag-wrapper {
+  flex-grow:1;
   display: flex;
   justify-content: center;
   margin: 1em 1em;

@@ -39,7 +39,6 @@ export default class OverView extends Vue {
 header {
   .expend {
     color: $main-blue;
-
   }
 
   .income > span {

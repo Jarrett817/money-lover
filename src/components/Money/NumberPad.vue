@@ -80,11 +80,13 @@ export default class NumberPad extends Vue {
 @import "~@/assets/style/helper.scss";
 
 .numberPad {
+  flex-grow: 1;
   .output {
     font-size: 36px;
     font-family: Consolas, monospace;
     padding: 9px 16px;
     text-align: right;
+    border-top:1px solid lightgrey;
   }
 
   .buttons {
@@ -138,8 +140,8 @@ export default class NumberPad extends Vue {
 
 
         .icon {
-          width: 28px;
-          height: 28px;
+         min-width: 28px;
+          min-height: 28px;
         }
       }
 

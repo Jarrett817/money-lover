@@ -46,16 +46,22 @@ export default class DailyOverView extends Vue {
 @import "~@/assets/style/helper.scss";
 
 footer {
+  height: 100%;
   flex-grow: 1;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  border-top: 1px solid lightgrey;
+  position: relative;
 
   .line {
-    height: 70%;
-    width: 2px;
+    height: 60%;
+    width: 1px;
     background: lightgrey;
+    position: absolute;
+    top:50%;
+    transform: translate(0,-50%);
   }
 
   & > label {
@@ -69,7 +75,10 @@ footer {
     white-space: nowrap;
 
     & .icon {
-      transform: scale(4);
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 20px;
     }
 
     & .income {

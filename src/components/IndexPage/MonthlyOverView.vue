@@ -10,25 +10,22 @@
 import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import dayjs from "dayjs";
-
+import beautyMonth from "@/lib/beautyMonth";
 @Component
 export default class OverView extends Vue {
 
-  beauty(date: string) {
-    return dayjs(date).month();
-  }
+
   get month(){
-    return this.beauty(new Date().toISOString())
+    return beautyMonth(new Date().toISOString())
   }
   getSum(type: string) {
     const {state} = this.$store;
     const records = state.recordList.filter((item: RecordItem) =>
-        this.beauty(item.createdTime) === this.month);
+        beautyMonth(item.createdTime) === this.month);
     const sum = records.filter((item: RecordItem) => item.type === type).reduce((sum: number, item: RecordItem) => {
           return sum += item.amount;
         }, 0
     );
-    console.log(sum);
     return sum.toFixed(2);
   }
 }

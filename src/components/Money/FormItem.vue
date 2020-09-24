@@ -3,7 +3,7 @@
     <span class="name">{{ fieldName }}</span>
     <template v-if="type==='date'">
       <input :type="type||'text'"
-             :value="beauty(value)"
+             :value="value"
              @input="onValueChanged($event.target.value)"
              :placeholder="placeholder">
     </template>
@@ -20,7 +20,6 @@
 import Vue from "vue";
 import {Component, Prop} from "vue-property-decorator";
 import dayjs from "dayjs";
-
 @Component
 export default class FormItem extends Vue {
   //获取input输入内容
@@ -31,15 +30,11 @@ export default class FormItem extends Vue {
 
   //监听value，一改变就把值传给父组件
   onValueChanged(value: string) {
-    console.log("这是传回来的value");
-    console.log(value);
     this.$emit("update:value", value);
   }
-
-  beauty(date: string){
-    return dayjs(date).format('YYYY-MM-DD')
+  beautyDay(date: string) {
+    return dayjs(date).format("YYYY-MM-DD");
   }
-
 }
 
 </script>

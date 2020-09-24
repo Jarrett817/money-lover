@@ -25,7 +25,6 @@ const store = new Vuex.Store({
             //重新筛选完
             const {groupIndex, itemIndex} = payload;
             state.currentRecord = state.sortedList[groupIndex].items[itemIndex];
-
         },
         changeCurrentType(state, type: string) {
             state.currentType = type;
@@ -33,14 +32,14 @@ const store = new Vuex.Store({
         SortList(state, type: string) {
             //筛选出同类型的记录进行排序
             const newList: RecordItem[] = state.recordList.filter(r => r.type === type).sort((a, b) =>
-                dayjs(b.createdTime).valueOf() - dayjs(a.createdTime).valueOf());
+                dayjs(b.date).valueOf() - dayjs(a.date).valueOf());
             //如果记录不存在就返回
             if (!newList[0]) {
                 state.sortedList = [];
                 return;
             }
             const result: DetailedRecord[] = [{
-                date: dayjs(newList[0].createdTime).format("YYYY-MM-DD"),
+                date: dayjs(newList[0].date).format("YYYY-MM-DD"),
                 total: 0,
                 items: [newList[0]]
             }];
@@ -48,10 +47,10 @@ const store = new Vuex.Store({
             for (let i = 1; i < newList.length; i++) {
                 const current = newList[i];
                 const last = result[result.length - 1];
-                if (dayjs(last.date).isSame(dayjs(current.createdTime), "day")) {
+                if (dayjs(last.date).isSame(dayjs(current.date), "day")) {
                     last.items.push(current);
                 } else {
-                    result.push({date: dayjs(current.createdTime).format("YYYY-MM-DD"), total: 0, items: [current]});
+                    result.push({date: dayjs(current.date).format("YYYY-MM-DD"), total: 0, items: [current]});
                 }
             }
             result.map(group => {
@@ -76,6 +75,7 @@ const store = new Vuex.Store({
             const index = state.recordList.indexOf(recordObj);
             state.recordList.splice(index, 1);
             store.commit("saveRecords");
+            state.currentRecord = undefined;
             router.back();
         },
         fetchRecords(state) {
@@ -84,7 +84,9 @@ const store = new Vuex.Store({
         ,
         createRecord(state, record) {
             const record2: RecordItem = clone(record);
-            record2.createdTime = record2.createdTime||new Date().toISOString();
+            //创建时间作为唯一标识
+            record2.createdTime = new Date().toISOString();
+            record2.date = record2.date || new Date().toISOString();
             state.recordList.push(record2);
             store.commit("saveRecords");
         }

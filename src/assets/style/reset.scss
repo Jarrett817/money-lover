@@ -17,3 +17,15 @@ button,input{
 :focus{
   outline:none;
 }
+
+a:focus,
+input:focus,
+p:focus,
+div:focus{
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  -webkit-user-modify:read-write-plaintext-only;
+}
+
+body{
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}

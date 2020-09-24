@@ -16,6 +16,8 @@ body {
   color: #333;
   font-size: 16px;
   background: #f5f5f5;
+
+
 }
 
 @media(min-width: 500px) {

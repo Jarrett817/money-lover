@@ -21,11 +21,6 @@ const routes: Array<RouteConfig> = [
         component: Index
     },
     {
-        path: "/chart",
-        component: Chart
-    },
-
-    {
         path: "/money",
         component: Money
     },
@@ -36,6 +31,10 @@ const routes: Array<RouteConfig> = [
     {
         path: "/statistics",
         component: Statistics
+    },
+    {
+        path: "/chart",
+        component: Chart
     },
     {
         path: "/labels/edit/:id",

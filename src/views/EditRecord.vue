@@ -1,15 +1,15 @@
 <template>
   <div>
-    <TopBar field-name="详情"></TopBar>
-    <ul class="options">
-      <li><span>类型：</span><span>{{ currentRecord.type === '-' ? '支出' : '收入' }}</span></li>
-      <li><span>金额：</span><span>{{ currentRecord.amount===null?0:currentRecord.amount.toFixed(2) }}</span></li>
-      <li><span> 日期：</span><span>{{ beauty(currentRecord.createdTime) }}</span></li>
-      <li class="notes"><span>备注：</span><span class="content">{{ currentRecord.notes }}</span></li>
-    </ul>
-    <div class="buttonWrapper">
-      <Button button-type="danger" @click="removeRecord">删除记录</Button>
-    </div>
+      <TopBar field-name="详情"></TopBar>
+      <ul class="options">
+        <li><span>类型：</span><span>{{ record.type === '-' ? '支出' : '收入' }}</span></li>
+        <li><span>金额：</span><span>{{ record.amount === null ? 0 : record.amount.toFixed(2) }}</span></li>
+        <li><span> 日期：</span><span>{{ beautyDay(record.date) }}</span></li>
+        <li class="notes"><span>备注：</span><span class="content">{{ record.notes }}</span></li>
+      </ul>
+      <div class="buttonWrapper">
+        <Button button-type="danger" @click="removeRecord">删除记录</Button>
+      </div>
   </div>
 </template>
 
@@ -26,25 +26,20 @@ import Button from "@/components/Button.vue";
 export default class EditRecord extends Vue {
   groupIndex = 0;
   itemIndex = 0;
-
+  record?: RecordItem=this.currentRecord
   get currentRecord() {
     this.groupIndex = parseInt(this.$route.params.groupIndex);
     this.itemIndex = parseInt(this.$route.params.itemIndex);
     this.$store.commit("setCurrentRecord", {groupIndex: this.groupIndex, itemIndex: this.itemIndex});
     //刷新数据会消失，这里应该是通过路由参数获取到明细页的两个id，然后在这里去调用store，每次重新获取
-    console.log(this.$store.state.currentRecord.createdTime);
-
     return this.$store.state.currentRecord;
   }
 
   removeRecord() {
-    console.log("这是即将删除的记录");
-    console.log(this.$store.state.currentRecord);
-    //到此传的值都是对的
     this.$store.commit("removeRecord", this.$store.state.currentRecord.createdTime);
   }
 
-  beauty(day: string) {
+  beautyDay(day: string) {
     return dayjs(day).format("YYYY-MM-DD");
   }
 }

@@ -20,19 +20,16 @@
 import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import dayjs from "dayjs";
-
+import beautyDay from "@/lib/beautyDay";
 type dataSource = DetailedRecord;
 
 @Component
 export default class DailyOverView extends Vue {
-  beauty(date: string) {
-    return dayjs(date).format("YYYY-MM-DD");
-  }
 
   getSum(type: string) {
     const {state} = this.$store;
     const records = state.recordList.filter((item: RecordItem) =>
-        this.beauty(item.createdTime) === this.beauty(new Date().toISOString()));
+        beautyDay(item.createdTime) === beautyDay(new Date().toISOString()));
     const sum = records.filter((item: RecordItem) => item.type === type).reduce((sum: number, item: RecordItem) => {
           return sum += item.amount;
         }, 0

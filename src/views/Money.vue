@@ -10,7 +10,7 @@
       <Icon name="date"></Icon>
       <FormItem field-name=""
                 type="date"
-                :value.sync="record.createdTime"
+                :value.sync="record.date"
       ></FormItem>
     </div>
     <div class="notesWrapper">
@@ -53,7 +53,7 @@ export default class Money extends Vue {
     return this.$store.state.currentType;
   }
 
-  record: RecordItem = {tags: [], notes: "", type: "", amount: 0, createdTime: new Date().toISOString()};
+  record: RecordItem = {tags: [], notes: "", type: "", amount: 0, date: '',createdTime: new Date().toISOString()};
 
   //将各次收集到的数据对象存入数组
   savaRecord() {

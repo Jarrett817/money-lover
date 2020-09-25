@@ -49,7 +49,6 @@ export default class Money extends Vue {
   }
 
   get chosenType() {
-    console.log("这是money获取到的vuex  type" + this.$store.state.currentType);
     return this.$store.state.currentType;
   }
 
@@ -60,7 +59,6 @@ export default class Money extends Vue {
     this.record.type = this.chosenType;
 
     if (this.record.tags.length === 0) {
-      console.log(this.record.tags);
       this.record.tags.push({id: "0", name: "这是一条随性的记录..."});
     }
     this.$store.commit("createRecord", this.record);

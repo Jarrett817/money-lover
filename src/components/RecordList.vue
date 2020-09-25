@@ -57,6 +57,7 @@ export default class RecordList extends Vue {
 <style lang="scss" scoped>
 @import '~@/assets/style/helper.scss';
 .totalWrapper{
+  flex-grow:1;
   height:100%;
   display:flex;
   flex-direction: column;

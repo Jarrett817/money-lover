@@ -68,6 +68,7 @@ export default class Index extends Vue {
 }
 
 .list-css-wrapper {
+  display:flex;
   flex:6 1 200px;
   overflow: auto;
 }

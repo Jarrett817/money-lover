@@ -2,14 +2,14 @@
   <footer>
     <label>今日收入
       <div class="income">
-        <span>￥{{ getSum('+') ? getSum('+') : 0 }}</span>
+        <span>￥{{ getSum('+') ? getSum('+') : 0.00 }}</span>
         <Icon name="wave"></Icon>
       </div>
     </label>
     <div class="line"></div>
     <label>今日支出
       <div class="expend">
-        <span>￥{{ getSum('-') ? getSum('-') : 0 }}</span>
+        <span>￥{{ getSum('-') ? getSum('-') : 0.00 }}</span>
         <Icon name="wave"></Icon>
       </div>
     </label>
@@ -21,20 +21,24 @@ import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import dayjs from "dayjs";
 import beautyDay from "@/lib/beautyDay";
+
 type dataSource = DetailedRecord;
 
 @Component
 export default class DailyOverView extends Vue {
+  beforeCreated() {
+    this.$store.commit("fetchRecords");
+  }
 
   getSum(type: string) {
     const {state} = this.$store;
     const records = state.recordList.filter((item: RecordItem) =>
-        beautyDay(item.createdTime) === beautyDay(new Date().toISOString()));
-    const sum = records.filter((item: RecordItem) => item.type === type).reduce((sum: number, item: RecordItem) => {
+        beautyDay(item.date) === beautyDay(new Date().toISOString()));
+    const result = records.filter((item: RecordItem) => item.type === type).reduce((sum: number, item: RecordItem) => {
           return sum += item.amount;
         }, 0
     );
-    return sum.toFixed(2);
+    return result.toFixed(2);
   }
 }
 </script>
@@ -57,8 +61,8 @@ footer {
     width: 1px;
     background: lightgrey;
     position: absolute;
-    top:50%;
-    transform: translate(0,-50%);
+    top: 50%;
+    transform: translate(0, -50%);
   }
 
   & > label {

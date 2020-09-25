@@ -31,6 +31,7 @@ export default class TopBar extends Vue {
   width: 100%;
   padding: 8px 8px;
   text-align: center;
+  flex-shrink: 0;
   @extend %outerShadow;
 
   > span {

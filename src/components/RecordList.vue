@@ -63,6 +63,7 @@ export default class RecordList extends Vue {
 }
 
 .none-tips {
+  height:100%;
   flex-grow: 1;
   display: flex;
   justify-content: center;

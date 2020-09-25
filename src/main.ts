@@ -17,7 +17,6 @@ new Vue({
     render: h => h(App)
 }).$mount("#app");
 
-//解决手机端浏览器导航栏影响页面布局问题
 window.onload = function () {
     setTimeout(function () {
         window.scrollTo(0, 999);

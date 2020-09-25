@@ -17,6 +17,10 @@ button,input{
 :focus{
   outline:none;
 }
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 //a:focus,
 //input:focus,

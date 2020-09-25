@@ -1,7 +1,7 @@
 <template>
   <div class="numberPad">
     <div class="output">{{ output || '0' }}</div>
-    <div class="buttons clearfix">
+    <div class="buttons clearfix" >
       <button @click="keyPress">1</button>
       <button @click="keyPress">2</button>
       <button @click="keyPress">3</button>

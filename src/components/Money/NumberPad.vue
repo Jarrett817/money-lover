@@ -122,7 +122,7 @@ export default class NumberPad extends Vue {
         width: 50%;
       }
 
-      $dColor:#ffd2e9;
+      $dColor:#fcb1aa;
       &:nth-child(4) {
         background: $dColor;
         .icon {

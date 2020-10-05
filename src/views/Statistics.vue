@@ -48,7 +48,7 @@ export default class Statistics extends Vue {
 }
 //deep语法将此加在Type子组件上
 ::v-deep .type-tabs-item {
-  background: white;
+  background: #f5f5f5;
 
   &.selected {
     background: #c4c4c4;

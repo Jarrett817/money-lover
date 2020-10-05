@@ -126,6 +126,15 @@ width:100%;
     align-items: center;
     justify-content: center;
     padding: 2px 0;
+    &.left.selected{
+      background:inherit;
+      color:inherit;
+    }
+    &.right.selected{
+      background:inherit;
+      color:inherit;
+
+    }
   }
 }
 </style>

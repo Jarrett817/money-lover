@@ -52,6 +52,16 @@ export default class Tabs extends Vue {
     position: relative;
     cursor: pointer;
 
+    &.left.selected{
+      background:lighten($main-blue,10%);
+      color:white;
+    }
+    &.right.selected{
+      background:lighten($main-red,10%);
+      color:white;
+
+    }
+
     &.left.selected::after {
       content: '';
       position: absolute;

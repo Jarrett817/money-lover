@@ -34,6 +34,7 @@ import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import Tabs from "@/components/Tabs.vue";
 import TopBar from "@/components/TopBar.vue";
+import beautyDay from "@/lib/beautyDay";
 
 
 @Component({
@@ -52,7 +53,7 @@ export default class Money extends Vue {
     return this.$store.state.currentType;
   }
 
-  record: RecordItem = {tags: [], notes: "", type: "", amount: 0, date: '',createdTime: new Date().toISOString()};
+  record: RecordItem = {tags: [], notes: "", type: "", amount: 0, date: beautyDay(new Date()),createdTime: new Date().toISOString()};
 
   //将各次收集到的数据对象存入数组
   savaRecord() {

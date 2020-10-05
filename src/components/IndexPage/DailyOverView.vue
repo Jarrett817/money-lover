@@ -2,14 +2,14 @@
   <footer>
     <label>今日收入
       <div class="income">
-        <span>￥{{ getSum('+') ? getSum('+') : 0.00 }}</span>
+        <span>+{{ getSum('+') ? getSum('+') : 0.00 }}</span>
         <Icon name="wave"></Icon>
       </div>
     </label>
     <div class="line"></div>
     <label>今日支出
       <div class="expend">
-        <span>￥{{ getSum('-') ? getSum('-') : 0.00 }}</span>
+        <span>-{{ getSum('-') ? getSum('-') : 0.00 }}</span>
         <Icon name="wave"></Icon>
       </div>
     </label>

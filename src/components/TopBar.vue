@@ -14,7 +14,7 @@ import {Component, Prop} from "vue-property-decorator";
 @Component
 export default class TopBar extends Vue {
   @Prop({required: true}) fieldName!: string;
-  @Prop({default: false}) iconHidden: boolean;
+  @Prop({default: false}) iconHidden!: boolean;
 
   goBack() {
     this.$router.back();

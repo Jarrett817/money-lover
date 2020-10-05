@@ -1,8 +1,8 @@
 <template>
   <header>
     <div>{{ month+1 }}月·支出</div>
-    <h1 class="expend">{{getSum('-')}}</h1>
-    <div class="income">{{ month+1 }}月·收入 <span>{{getSum('+')}}</span></div>
+    <h1 class="expend">-{{getSum('-')}}</h1>
+    <div class="income">{{ month+1 }}月·收入 <span>+{{getSum('+')}}</span></div>
   </header>
 </template>
 

@@ -58,7 +58,6 @@ export default class Chart extends Vue {
         results.push(0);
       }
     }
-    // console.log(results);
     return results;
   }
 

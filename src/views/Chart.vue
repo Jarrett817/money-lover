@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <TopBar field-name="月报"></TopBar>
+    <TopBar field-name="月报" icon-hidden="true"></TopBar>
     <div id="chartWrapper">
       <EChart :options="x"/>
     </div>

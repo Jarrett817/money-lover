@@ -1,6 +1,6 @@
 <template>
   <Layout>
-      <TopBar field-name="标签管理"/>
+      <TopBar field-name="标签管理" icon-hidden="true"/>
       <div class="tags">
         <router-link class="tag"
                      v-for="tag in tags"
@@ -69,8 +69,5 @@ export default class Labels extends mixins(TagHelper) {
   display: flex;
   justify-content: center;
   margin: 1em 1em;
-}
-::v-deep .TopBar-wrapper .icon {
-  visibility: hidden
 }
 </style>

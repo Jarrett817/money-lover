@@ -1,6 +1,6 @@
 <template>
   <layout>
-    <TopBar field-name="明细"></TopBar>
+    <TopBar field-name="明细" icon-hidden="true"></TopBar>
     <Tabs class-prefix="type"></Tabs>
     <div class="list-wrapper">
       <RecordList :data-source="result"></RecordList>
@@ -46,7 +46,6 @@ export default class Statistics extends Vue {
   flex-grow: 1;
   overflow-y: auto;
 }
-
 //deep语法将此加在Type子组件上
 ::v-deep .type-tabs-item {
   background: white;
@@ -58,9 +57,5 @@ export default class Statistics extends Vue {
       display: none;
     }
   }
-}
-
-::v-deep .TopBar-wrapper .icon {
-  visibility: hidden
 }
 </style>

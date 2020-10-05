@@ -1,7 +1,7 @@
 <template>
   <div class="TopBar-wrapper">
-    <Icon name="back" class="left" @click.native="goBack"/>
-    <span>{{ this.fieldName ? this.fieldName : '' }}</span>
+    <Icon :class="{IconVisible:iconHidden}" name="back" class="left" @click.native="goBack"/>
+    <span>{{ fieldName ? fieldName : '' }}</span>
     <slot/>
     <Icon class="right"/>
   </div>
@@ -14,6 +14,7 @@ import {Component, Prop} from "vue-property-decorator";
 @Component
 export default class TopBar extends Vue {
   @Prop({required: true}) fieldName!: string;
+  @Prop({default: false}) iconHidden: boolean;
 
   goBack() {
     this.$router.back();
@@ -23,6 +24,7 @@ export default class TopBar extends Vue {
 
 <style lang="scss" scoped>
 @import '~@/assets/style/helper.scss';
+
 .TopBar-wrapper {
   display: flex;
   flex-direction: row;
@@ -33,6 +35,10 @@ export default class TopBar extends Vue {
   text-align: center;
   flex-shrink: 0;
   @extend %outerShadow;
+
+  .IconVisible {
+    visibility: hidden;
+  }
 
   > span {
     flex: 1;

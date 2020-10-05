@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <TopBar field-name="">
+    <TopBar field-name="" icon-hidden="true">
       <Tabs></Tabs>
     </TopBar>
     <div class="tagsWrapper">
@@ -110,11 +110,6 @@ width:100%;
     margin-left: 8px;
   }
 }
-
-::v-deep .TopBar-wrapper .icon {
-  visibility: hidden
-}
-
 ::v-deep .tabs {
   background: inherit;
   display: flex;

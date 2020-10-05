@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <div class="topBar-wrapper">
-      <TopBar field-name="记了个账"></TopBar>
+      <TopBar field-name="记了个账" icon-hidden="true"></TopBar>
     </div>
     <div class="monthly-over-view">
       <MonthlyOverView class="over-view"></MonthlyOverView>
@@ -94,12 +94,6 @@ main {
     border-top: 1px solid #e8e8e8;
   }
 }
-
-
-::v-deep .TopBar-wrapper .icon {
-  visibility: hidden
-}
-
 //deep语法将此加在Type子组件上
 ::v-deep .type-tabs-item {
   background: #f5f5f5;

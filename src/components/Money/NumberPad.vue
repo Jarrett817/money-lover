@@ -1,7 +1,7 @@
 <template>
   <div class="numberPad">
     <div class="output">{{ output || '0' }}</div>
-    <div class="buttons clearfix" >
+    <div class="buttons clearfix">
       <button @click="keyPress">1</button>
       <button @click="keyPress">2</button>
       <button @click="keyPress">3</button>
@@ -81,40 +81,39 @@ export default class NumberPad extends Vue {
 
 .numberPad {
   flex-grow: 1;
+
   .output {
     font-size: 36px;
     font-family: Consolas, monospace;
     padding: 9px 16px;
     text-align: right;
-    border-top:1px solid lightgrey;
+    border-top: 1px solid lightgrey;
   }
 
   .buttons {
     $border: #cdc9c9;
     @extend %clearFix;
     @extend %innerShadow;
-    border: 4px solid $border;
-    background: $border;
-
+    padding: 2px;
+   background: inherit;
     > button {
-
+      $bg: #ebecf0;
       $h: 30px;
       cursor: pointer;
       width: 25%;
       height: 64px;
       float: left;
-      background: transparent;
-      border: $border solid 3px;
-      border-radius: 10px;
-      $bg: #ffffff;
+      background:$bg ;
+      outline: none;
+      border-radius: 16px;
+      border:6px solid #f5f5f5;
 
       &:active {
-        background: darken($bg, 40%) !important;
+        background: darken($bg, 20%);
         color: white;
       }
 
       &.ok {
-
         height: 64*2px;
         float: right;
       }
@@ -123,54 +122,37 @@ export default class NumberPad extends Vue {
         width: 50%;
       }
 
-
-      &:nth-child(1) {
-        background: $bg;
-      }
-
-      &:nth-child(2), &:nth-child(5) {
-        background: darken($bg, 4%);
-      }
-
-      &:nth-child(3), &:nth-child(6), &:nth-child(9) {
-        background: darken($bg, 8%)
-      }
-
+      $dColor:#ffd2e9;
       &:nth-child(4) {
-
-
+        background: $dColor;
         .icon {
-         min-width: 28px;
+          min-width: 28px;
           min-height: 28px;
         }
-      }
-
-      &:nth-child(7), &:nth-child(10) {
-        background: darken($bg, 12%)
-      }
-
-      &:nth-child(11), &:nth-child(13) {
-        background: darken($bg, 16%);
-      }
-
-      &:nth-child(14) {
-        background: darken($bg, 20%);
-      }
-
-      &:nth-child(4), &:nth-child(8) {
-        background: darken($bg, 40%);
-
         &:active {
-          background: darken($bg, 6%) !important;
-          color: #333;
+          background: darken($dColor, 15%);
+          color:white;
         }
       }
 
-      &:nth-child(12) {
-        background: darken($bg, 6%);
+      $cColor: #e6f7ff;
+
+      &:nth-child(8) {
+        background: $cColor;
 
         &:active {
-          background: darken($bg, 40%) !important;
+          background: darken($cColor, 15%);
+          color:white;
+        }
+      }
+
+      $okColor: #88daff;
+
+      &:nth-child(12) {
+        background:$okColor ;
+
+        &:active {
+          background: darken($okColor, 15%);
           color: white;
         }
       }

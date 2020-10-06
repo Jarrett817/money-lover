@@ -69,32 +69,31 @@ export default class Tags extends mixins(TagHelper) {
     flex-wrap: nowrap;
     overflow: auto;
     font-size: 16px;
-
     //&::-webkit-scrollbar {
     //  display: none;
     //}
 
     > li {
       cursor: pointer;
-      $bg: #d9d9d9;
+      $bg: #ebecf0;
       $h: 32px;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      background: white;
       flex-wrap: wrap;
       height: $h;
       line-height: $h;
-      //padding: 0 16px;
-      margin-right: 12px;
-      margin-bottom: 16px;
+      margin: 0 0 10px 12px;
       border-radius: $h/4;
       border: 1px solid lightgrey;
       min-width: 80px;
+      background: #f5f5f5;
+      box-shadow: 3px 3px 4px #d0d0d0,
+      3px 3px 4px #ffffff;
 
       &.selected {
-        background: darken($bg, 30%);
+        background: darken($bg, 40%);
         color: white;
       }
     }

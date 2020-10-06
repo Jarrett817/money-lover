@@ -6,6 +6,7 @@
     <div class="tagsWrapper">
       <Tags :value.sync="record.tags"></Tags>
     </div>
+    <div class="formWrapper">
     <div class="createdTimeWrapper">
       <Icon name="date"></Icon>
       <FormItem field-name=""
@@ -19,6 +20,7 @@
                 placeholder="写备注..."
                 :value.sync="record.notes"
       ></FormItem>
+    </div>
     </div>
     <div class="numberPadWrapper">
       <NumberPad :value.sync="record.amount" @submit="savaRecord"></NumberPad>
@@ -72,8 +74,13 @@ export default class Money extends Vue {
 <style lang="scss" scoped>
 .tagsWrapper {
 flex-grow: 1;
-}
 
+}
+.formWrapper{
+  background: #f5f5f5;
+  box-shadow: inset 3px 3px 4px #d0d0d0,
+  inset -3px -3px 4px #ffffff;
+}
 .createdTimeWrapper {
   flex-grow: 1;
   padding: 2px 0;
@@ -85,6 +92,9 @@ flex-grow: 1;
 
   .icon {
     margin-left: 8px;
+    background: #f5f5f5;
+    box-shadow: 2px 2px 2px #d0d0d0,
+    2px 2px 2px #ffffff;
   }
 }
 
@@ -109,6 +119,9 @@ width:100%;
 
   .icon {
     margin-left: 8px;
+    background: #f5f5f5;
+    box-shadow: 2px 2px 2px #d0d0d0,
+    2px 2px 2px #ffffff;
   }
 }
 ::v-deep .tabs {

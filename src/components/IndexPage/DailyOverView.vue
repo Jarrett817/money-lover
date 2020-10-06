@@ -55,7 +55,6 @@ footer {
   justify-content: center;
   border-top: 1px solid lightgrey;
   position: relative;
-
   .line {
     height: 60%;
     width: 1px;

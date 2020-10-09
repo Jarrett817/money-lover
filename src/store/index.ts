@@ -88,6 +88,7 @@ const store = new Vuex.Store({
             record2.createdTime = new Date().toISOString();
             record2.date = record2.date || new Date().toISOString();
             state.recordList.push(record2);
+            alert('成功添加记录！')
             store.commit("saveRecords");
         }
         ,

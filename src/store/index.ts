@@ -101,9 +101,9 @@ const store = new Vuex.Store({
             state.tagList = JSON.parse(window.localStorage.getItem("tagList") || "[]");
             if (!state.tagList || state.tagList.length === 0) {
                 state.tagList = [
-                    {id: createId().toString(), name: "抽烟"},
-                    {id: createId().toString(), name: "喝酒"},
-                    {id: createId().toString(), name: "烫头"}
+                    {id: createId().toString(), name: "饮食"},
+                    {id: createId().toString(), name: "购物"},
+                    {id: createId().toString(), name: "交通出行"}
                 ];
                 store.commit("saveTags");
             }
